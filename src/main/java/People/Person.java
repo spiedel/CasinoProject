@@ -8,14 +8,14 @@ public abstract class Person {
 
     private String name;
     private int age;
-    private int numberOfChips;
-    private ArrayList<Card> hand;
+    protected int numberOfChips;
+    protected ArrayList<Card> hand;
 
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
         this.numberOfChips = 0;
-        this.hand = new ArrayList<>();
+        this.hand = new ArrayList<Card>();
     }
 
     public String getName() {

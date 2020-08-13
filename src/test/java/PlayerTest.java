@@ -84,6 +84,12 @@ public class PlayerTest {
         player.addChips(10);
         Assert.assertEquals(10, player.getNumberOfChips());
     }
+    @Test
+    public void canRemoveChips() {
+        player.addChips(300);
+        player.removeChips(200);
+        assertEquals(100, player.getNumberOfChips());
+    }
 
     @Test
     public void canCashInChips(){

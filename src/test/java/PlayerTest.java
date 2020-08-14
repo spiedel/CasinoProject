@@ -1,6 +1,8 @@
 import DeckOfCardsClasses.Card;
 import DeckOfCardsClasses.CardRank;
 import DeckOfCardsClasses.CardSuit;
+import Games.RouletteCollection.ColourBet;
+import Games.RouletteCollection.IRouletteBet;
 import People.Player;
 import org.junit.Assert;
 import org.junit.Before;
@@ -102,6 +104,30 @@ public class PlayerTest {
     public void canGetHand(){
         ArrayList<Card> returnedHand = player.getHand();
         Assert.assertEquals(0, returnedHand.size());
+    }
+
+    @Test
+    public void canAddColourBetToBetList(){
+        IRouletteBet bet = new ColourBet("red", 8);
+        //When: I add bet topo list
+        player.addRouletteBet(bet);
+        //Then: I expect there to be one bet in the list
+        assertEquals(1, player.betList().size());
+    }
+
+
+    @Test
+    public void canRemoveBetFromList(){
+        IRouletteBet bet = new ColourBet("red", 8);
+        player.addRouletteBet(bet);
+        IRouletteBet bet2 = new ColourBet("red", 8);
+        player.addRouletteBet(bet2);
+
+        //When: I remove a bet
+        player.removeRouletteBet();
+
+        //Then: I expect just one bet left
+        assertEquals(1,player.betList().size());
     }
 
 

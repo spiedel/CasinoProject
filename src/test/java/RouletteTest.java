@@ -1,4 +1,7 @@
 import Games.Roulette;
+import Games.RouletteCollection.ColourBet;
+import Games.RouletteCollection.IRouletteBet;
+import Games.RouletteCollection.RouletteSetUp;
 import People.Dealer;
 import People.Player;
 import org.junit.Before;
@@ -7,8 +10,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class RouletteTest {
     Roulette roulette;
@@ -82,28 +84,34 @@ public class RouletteTest {
         assertEquals(0, player.getNumberOfChips());
     }*/
 
-    /*@Test
+    @Test
     public void canPlay() {
         //given we have a player with 20 chips
         player.addChips(20);
-        //and a list of two bets
+        //And: Player is in our Player List
+        roulette.addPlayer(player);
+
         //and the player has placed the bet
-        roulette.bet(10, betNumbers, player);
+        IRouletteBet bet = new ColourBet("red", 8);
+        //And: the bet is on the player list
+        player.addRouletteBet(bet);
 
         //when play is called with a result of 11
         roulette.play();
 
-        //then the player should have 20 chips
-        assertEquals(20, player.getNumberOfChips());
-        // the dealer should have 1010 chips
-        assertEquals(1010, dealer.getNumberOfChips());
-    }*/
+
+        //Then: the player should have 28
+        assertEquals(28, player.getNumberOfChips());
+
+    }
+
+
 
     @Test
     public void canSpin() {
         //when seeded with 3
-        int result = roulette.spin();
-        assertEquals(17, result);
+
+        assertEquals(RouletteSetUp.Eighteen,roulette.spin());
     }
 
 
@@ -114,4 +122,6 @@ public class RouletteTest {
         //Then: I expect there to be a list of 36 Roulette Set up items
         assertEquals(36, roulette.getStartPoint().size());
     }
+
+
 }

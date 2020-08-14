@@ -14,18 +14,24 @@ public class ColourBet implements IRouletteBet {
     }
 
 
-    public boolean isBetSuccessful(/*Colour from game*/) {
-
+    public boolean isBetSuccessful(RouletteSetUp rouletteValue) {
+        if (rouletteValue.getColour().equals(colourBetOn)){
+            return true;
+        } else
+            {
+            return false;
+        }
         //is colour from game the same as the colour the person bet on.
-        return false;
+
     }
 
+
+    //Getters
     public int getBetAmount() {
         return amountBet;
     }
 
 
-    //Getters
     public String getColourBetOn() {
         return colourBetOn;
     }

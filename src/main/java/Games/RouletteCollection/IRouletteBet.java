@@ -2,7 +2,7 @@ package Games.RouletteCollection;
 
 public interface IRouletteBet {
 
-    boolean isBetSuccessful();
+    boolean isBetSuccessful(RouletteSetUp rouletteSetUp);
     int getBetAmount();
 
 }

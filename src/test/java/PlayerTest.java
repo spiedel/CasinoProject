@@ -3,6 +3,7 @@ import DeckOfCardsClasses.CardRank;
 import DeckOfCardsClasses.CardSuit;
 import Games.RouletteCollection.ColourBet;
 import Games.RouletteCollection.IRouletteBet;
+import Games.RouletteCollection.OddEvenBet;
 import People.Player;
 import org.junit.Assert;
 import org.junit.Before;
@@ -129,6 +130,8 @@ public class PlayerTest {
         //Then: I expect just one bet left
         assertEquals(1,player.betList().size());
     }
+
+
 
 
 }

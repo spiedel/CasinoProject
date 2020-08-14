@@ -62,7 +62,7 @@ public class RouletteTest {
         assertEquals(0, roulette.getNumberOfPlayers());
     }
 
-    @Test
+    /*@Test
     public void canPlaceOneBet() {
         //given you have a player
         //and the player has enough chips for a bet
@@ -80,9 +80,9 @@ public class RouletteTest {
         assertEquals(10, betAmount);
 
         assertEquals(0, player.getNumberOfChips());
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void canPlay() {
         //given we have a player with 20 chips
         player.addChips(20);
@@ -97,12 +97,21 @@ public class RouletteTest {
         assertEquals(20, player.getNumberOfChips());
         // the dealer should have 1010 chips
         assertEquals(1010, dealer.getNumberOfChips());
-    }
+    }*/
 
     @Test
     public void canSpin() {
         //when seeded with 3
         int result = roulette.spin();
         assertEquals(17, result);
+    }
+
+
+    @Test
+    public void canSetUpRouletteStartList(){
+        //Given:
+        //When: I create a roulette game
+        //Then: I expect there to be a list of 36 Roulette Set up items
+        assertEquals(36, roulette.getStartPoint().size());
     }
 }

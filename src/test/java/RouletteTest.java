@@ -1,8 +1,5 @@
 import Games.Roulette;
-import Games.RouletteCollection.ColourBet;
-import Games.RouletteCollection.IRouletteBet;
-import Games.RouletteCollection.OddEvenBet;
-import Games.RouletteCollection.RouletteSetUp;
+import Games.RouletteCollection.*;
 import People.Dealer;
 import People.Player;
 import org.junit.Before;
@@ -187,6 +184,26 @@ public class RouletteTest {
         roulette.play();
 
         //Then: We expect the player to have
+        assertEquals(-14, player.getNumberOfChips());
+    }
+
+    //Case: Can handle a combination bet
+    @Test
+    public void playCombinationBet(){
+        //Given: We have a Roulette Game
+        //And: The Game has an active  Player
+        roulette.addPlayer(player);
+        //And: The active Player has made a combination bet believing the number will be black and odd simultaneously
+        IRouletteBet bet = new ColourBet("black", 9);
+        IRouletteBet bet2 = new OddEvenBet(5 , "odd");
+        IRouletteBet combinationBet = new CombinationBet(bet, bet2);
+        //And: The combination bet is in the players bet list
+        player.addRouletteBet(combinationBet);
+
+        //When: I Play Roulette (seeding gives)
+        roulette.play();
+
+        //Then: I expect the player to loose (number from spin seeding is not odd).
         assertEquals(-14, player.getNumberOfChips());
     }
 

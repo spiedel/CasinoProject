@@ -108,7 +108,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void canAddColourBetToBetList(){
+    public void canAddIRouletteBetToBetList(){
         IRouletteBet bet = new ColourBet("red", 8);
         //When: I add bet topo list
         player.addRouletteBet(bet);

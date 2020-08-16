@@ -22,7 +22,7 @@ public class EvenTest {
 
     @Test
     public void canGetBetType(){
-        assertEquals("odd", oddEvenBet.getOddOREven());
+        assertTrue( oddEvenBet.getOddOREven().equalsIgnoreCase("even"));
     }
 
     @Test

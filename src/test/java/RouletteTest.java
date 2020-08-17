@@ -1,4 +1,5 @@
 import Games.Roulette;
+import Games.RouletteCollection.*;
 import People.Dealer;
 import People.Player;
 import org.junit.Before;
@@ -7,8 +8,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class RouletteTest {
     Roulette roulette;
@@ -62,7 +62,7 @@ public class RouletteTest {
         assertEquals(0, roulette.getNumberOfPlayers());
     }
 
-    @Test
+    /*@Test
     public void canPlaceOneBet() {
         //given you have a player
         //and the player has enough chips for a bet
@@ -80,29 +80,132 @@ public class RouletteTest {
         assertEquals(10, betAmount);
 
         assertEquals(0, player.getNumberOfChips());
-    }
+    }*/
 
     @Test
     public void canPlay() {
         //given we have a player with 20 chips
         player.addChips(20);
-        //and a list of two bets
+        //And: Player is in our Player List
+        roulette.addPlayer(player);
+
         //and the player has placed the bet
-        roulette.bet(10, betNumbers, player);
+        IRouletteBet bet = new ColourBet("red", 8);
+        //And: the bet is on the player list
+        player.addRouletteBet(bet);
 
         //when play is called with a result of 11
         roulette.play();
 
-        //then the player should have 20 chips
-        assertEquals(20, player.getNumberOfChips());
-        // the dealer should have 1010 chips
-        assertEquals(1010, dealer.getNumberOfChips());
+
+        //Then: the player should have 28
+        assertEquals(28, player.getNumberOfChips());
+
     }
+
+
 
     @Test
     public void canSpin() {
         //when seeded with 3
-        int result = roulette.spin();
-        assertEquals(17, result);
+
+        assertEquals(RouletteSetUp.Eighteen,roulette.spin());
     }
+
+
+    @Test
+    public void canSetUpRouletteStartList(){
+        //Given:
+        //When: I create a roulette game
+        //Then: I expect there to be a list of 36 Roulette Set up items
+        assertEquals(36, roulette.getStartPoint().size());
+    }
+
+    //Case: Player Makes Two Bets: One Colour, and one odd even
+    //And: Both bets sucessful
+    @Test
+    public void canMakeMoreThaOneBet(){
+        //Given: We have a Player that is in the roulette game
+        roulette.addPlayer(player);
+        //And: The pLayer has made a colour bet that a red colour will come up
+        IRouletteBet bet = new ColourBet("red", 9);
+        //Add: The player has made a second bet on the number coming up being even
+        IRouletteBet bet2 = new OddEvenBet(5 , "even");
+        //And: The bets have been added to the players list of bets
+        player.addRouletteBet(bet);
+        player.addRouletteBet(bet2);
+
+
+        //When: We play the Roulette Game
+        roulette.play();
+
+        //Then: We expect the player to have
+        assertEquals(14, player.getNumberOfChips());
+    }
+
+    //Case: Two bets and one is successful
+    @Test
+    public void twoBetsMadeOneUnsuccessful(){
+        //Given: We have a Player that is in the roulette game
+        roulette.addPlayer(player);
+        //And: The pLayer has made a colour bet that a red colour will come up
+        IRouletteBet bet = new ColourBet("black", 9);
+        //Add: The player has made a second bet on the number coming up being even
+        IRouletteBet bet2 = new OddEvenBet(5 , "even");
+        //And: The bets have been added to the players list of bets
+        player.addRouletteBet(bet);
+        player.addRouletteBet(bet2);
+
+
+        //When: We play the Roulette Game
+        roulette.play();
+
+        //Then: We expect the player to have
+        assertEquals(-4, player.getNumberOfChips());
+    }
+
+
+
+    //Case: Two bets and neither are sucessful
+    @Test
+    public void twoBetsMadeBothUnsuccessful(){
+        //Given: We have a Player that is in the roulette game
+        roulette.addPlayer(player);
+        //And: The pLayer has made a colour bet that a red colour will come up
+        IRouletteBet bet = new ColourBet("black", 9);
+        //Add: The player has made a second bet on the number coming up being even
+        IRouletteBet bet2 = new OddEvenBet(5 , "odd");
+        //And: The bets have been added to the players list of bets
+        player.addRouletteBet(bet);
+        player.addRouletteBet(bet2);
+
+
+        //When: We play the Roulette Game
+        roulette.play();
+
+        //Then: We expect the player to have
+        assertEquals(-14, player.getNumberOfChips());
+    }
+
+    //Case: Can handle a combination bet
+    @Test
+    public void playCombinationBet(){
+        //Given: We have a Roulette Game
+        //And: The Game has an active  Player
+        roulette.addPlayer(player);
+        //And: The active Player has made a combination bet believing the number will be black and odd simultaneously
+        IRouletteBet bet = new ColourBet("black", 9);
+        IRouletteBet bet2 = new OddEvenBet(5 , "odd");
+        IRouletteBet combinationBet = new CombinationBet(bet, bet2);
+        //And: The combination bet is in the players bet list
+        player.addRouletteBet(combinationBet);
+
+        //When: I Play Roulette (seeding gives)
+        roulette.play();
+
+        //Then: I expect the player to loose (number from spin seeding is not odd).
+        assertEquals(-14, player.getNumberOfChips());
+    }
+
+
 }

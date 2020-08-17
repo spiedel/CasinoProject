@@ -204,7 +204,7 @@ public class BlackJackTest {
     }
 
     @Test
-    public void dealerWinsIfThePlayerHasntGoenBust(){
+    public void dealerWinsIfThePlayerHasntGoneBust(){
         Scanner scanner = new Scanner("stand");
         dealer.getDeck().addDeck();
         blackjack.addPlayer(player);

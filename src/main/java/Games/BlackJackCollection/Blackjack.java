@@ -88,8 +88,7 @@ public class Blackjack implements IPlay {
     }
 
     public void initialPlayerDeal(){
-        for (Player player: players
-             ) {
+        for (Player player: players) {
             dealer.dealCard(player);
             dealer.dealCard(player);
             Card card = player.getHand().get(0);

@@ -99,7 +99,6 @@ public class Blackjack implements IPlay {
 
     public int getDealersScore() {
         while (getHandTotal(dealer) < 17) {
-
             dealer.dealCard(dealer);
             if (isBust(dealer)) {
                 return 0;

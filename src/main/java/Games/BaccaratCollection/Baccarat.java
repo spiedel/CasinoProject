@@ -64,7 +64,7 @@ public class Baccarat {
 //        CardRank.KING.setValue(0);
 //    }
 
-    public void initialDeal(Player player){
+    public void initialDeal(Player player, Dealer dealer){
             dealer.dealCard(player);
             dealer.dealCard(player);
             dealer.dealCard(dealer);
@@ -73,7 +73,7 @@ public class Baccarat {
             Card playerCard2 = player.getHand().get(1);
             Card dealerCard1 = dealer.getHand().get(0);
             Card dealerCard2 = dealer.getHand().get(1);
-            System.out.printf("Player %s has %s of %s and %s of %s", player.getName(), playerCard1.getRank(), playerCard1.getSuit(), playerCard2.getRank(), playerCard2.getSuit());
+            System.out.printf("Player %s has %s of %s and %s of %s \n", player.getName(), playerCard1.getRank(), playerCard1.getSuit(), playerCard2.getRank(), playerCard2.getSuit());
             System.out.printf("Dealer %s has %s of %s and %s of %s", dealer.getName(), dealerCard1.getRank(), dealerCard1.getSuit(), dealerCard2.getRank(), dealerCard2.getSuit());
     }
 
@@ -97,7 +97,7 @@ public class Baccarat {
 
         int dealerCardTotal = getHandTotal(dealer);
 
-        if (isThirdCardDrawnToPlayer(player)) {
+        if (player.getNumberOfCards() == 3) {
             int valueOfPlayersThirdCard = player.getHand().get(2).getRankValue();
 
             if (dealerCardTotal <= 2) {
@@ -140,12 +140,6 @@ public class Baccarat {
     }
 
     public BaccaratOutcome getWinner(Player player, Dealer dealer){
-        if (isThirdCardDrawnToPlayer(player)){
-            dealer.dealCard(player);
-        }
-        if (isThirdCardDrawnToDealer(dealer, player)){
-            dealer.dealCard(dealer);
-        }
         int playerHandTotal = getHandTotal(player);
         int dealerHandTotal = getHandTotal(dealer);
 
@@ -198,6 +192,13 @@ public class Baccarat {
 
     public void play(Scanner scanner){
         playersMakeBets(scanner);
+        initialDeal(players.get(0), dealer);
+        if (isThirdCardDrawnToPlayer(players.get(0))){
+            dealer.dealCard(players.get(0));
+        }
+        if (isThirdCardDrawnToDealer(dealer, players.get(0))){
+            dealer.dealCard(dealer);
+        }
         BaccaratOutcome betType = getWinner(players.get(0), dealer);
         payOutBets(betType);
     }

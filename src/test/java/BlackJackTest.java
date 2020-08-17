@@ -190,7 +190,7 @@ public class BlackJackTest {
     public void playerWinsIfDealerGoesBust(){
         Scanner scanner = new Scanner("hit\nstand");
         dealer.getDeck().addCardsToDeck(new Card(CardRank.JACK, CardSuit.HEARTS));
-        dealer.getDeck().addCardsToDeck(new Card(CardRank.ACE, CardSuit.HEARTS));
+        dealer.getDeck().addCardsToDeck(new Card(CardRank.JACK, CardSuit.CLUBS));
         blackjack.addPlayer(player);
         Card card = new Card(CardRank.SEVEN, CardSuit.DIAMONDS);
         Card card2 = new Card(CardRank.EIGHT, CardSuit.SPADES);
@@ -199,7 +199,7 @@ public class BlackJackTest {
         blackjack.play(scanner);
         assertEquals(990, dealer.getNumberOfChips());
         assertEquals(25,blackjack.getHandTotal(dealer));
-        assertEquals(1, blackjack.getHandTotal(player));
+        assertEquals(10, blackjack.getHandTotal(player));
         assertEquals(10, player.getNumberOfChips());
     }
 

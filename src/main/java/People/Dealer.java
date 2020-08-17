@@ -1,5 +1,6 @@
 package People;
 
+import DeckOfCardsClasses.Card;
 import DeckOfCardsClasses.CardDeck;
 
 public class Dealer extends Person {
@@ -17,7 +18,9 @@ public class Dealer extends Person {
         return deck;
     }
 
-    public void dealCard(Person person){
-        person.addCards(deck.removeCardFromDeck());
+    public Card dealCard(Person person){
+        Card card = deck.removeCardFromDeck();
+        person.addCards(card);
+        return card;
     }
 }

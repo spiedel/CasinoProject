@@ -80,6 +80,24 @@ public class Blackjack implements IPlay {
         }
     }
 
+    public void initialDealerDeal(){
+        dealer.dealCard(dealer);
+        dealer.dealCard(dealer);
+        Card card = dealer.getHand().get(0);
+        System.out.printf("Dealer has %s of %s", card.getRank(), card.getSuit());
+    }
+
+    public void initialPlayerDeal(){
+        for (Player player: players
+             ) {
+            dealer.dealCard(player);
+            dealer.dealCard(player);
+            Card card = player.getHand().get(0);
+            Card card2 = player.getHand().get(1);
+            System.out.printf("Player %s has %s of %s and %s of %s", player.getName(), card.getRank(), card.getSuit(), card2.getRank(), card2.getSuit());
+        }
+    }
+
     public int getDealersScore() {
         while (getHandTotal(dealer) < 17) {
             dealer.dealCard(dealer);
@@ -92,10 +110,12 @@ public class Blackjack implements IPlay {
         String input = scanner.nextLine();
         while (!input.equalsIgnoreCase("stand")) {
             if (input.equalsIgnoreCase("hit")) {
-                dealer.dealCard(player);
+                Card card = dealer.dealCard(player);
                 if (isPlayerBust(player)) {
                     return 0;
                 }
+                System.out.printf("\nYou got a %s of %s, do you want to hit or stand?",card.getRank(), card.getSuit());
+                input = scanner.nextLine();
             } else {
                 System.out.println("Please enter hit or stand.");
                 input = scanner.nextLine();

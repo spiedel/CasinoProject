@@ -90,7 +90,7 @@ public class BlackJackTest {
         player.addCards(card);
         player.addCards(card2);
         player.addCards(card3);
-        assertTrue(blackjack.isPlayerBust(player));
+        assertTrue(blackjack.isBust(player));
     }
     @Test
     public void canCheckIfPlayerIsNotBust(){
@@ -98,7 +98,7 @@ public class BlackJackTest {
         Card card2 = new Card(CardRank.QUEEN,CardSuit.SPADES);
         player.addCards(card);
         player.addCards(card2);
-        assertFalse(blackjack.isPlayerBust(player));
+        assertFalse(blackjack.isBust(player));
     }
 
     @Test
@@ -131,6 +131,97 @@ public class BlackJackTest {
         blackjack.getPlayerScore(scanner, player);
         assertEquals(3, player.getNumberOfCards());
         assertEquals(6, blackjack.getHandTotal(player));
+    }
+
+    @Test
+    public void PlayerStands(){
+        Scanner scanner = new Scanner("stand");
+        dealer.getDeck().addDeck();
+        blackjack.addPlayer(player);
+        Card card = new Card(CardRank.JACK, CardSuit.DIAMONDS);
+        Card card2 = new Card(CardRank.EIGHT, CardSuit.SPADES);
+        player.addCards(card);
+        player.addCards(card2);
+        Card card3 = new Card (CardRank.SEVEN, CardSuit.HEARTS);
+        dealer.addCards(card3);
+        dealer.addCards(card);
+        blackjack.play(scanner);
+        assertEquals(17,blackjack.getHandTotal(dealer));
+        assertEquals(18, blackjack.getHandTotal(player));
+        assertEquals(10, player.getNumberOfChips());
+        assertEquals(990, dealer.getNumberOfChips());
+    }
+    @Test
+    public void canPlayerHitsOnce(){
+        Scanner scanner = new Scanner("hit\nstand");
+        dealer.getDeck().addDeck();
+        blackjack.addPlayer(player);
+        Card card = new Card(CardRank.JACK, CardSuit.DIAMONDS);
+        Card card2 = new Card(CardRank.EIGHT, CardSuit.SPADES);
+        player.addCards(card);
+        player.addCards(card2);
+        Card card3 = new Card (CardRank.SEVEN, CardSuit.HEARTS);
+        dealer.addCards(card3);
+        dealer.addCards(card);
+        blackjack.play(scanner);
+        assertEquals(17,blackjack.getHandTotal(dealer));
+        assertEquals(19, blackjack.getHandTotal(player));
+        assertEquals(10, player.getNumberOfChips());
+        assertEquals(990, dealer.getNumberOfChips());
+    }
+    @Test
+    public void canPlayerGoBust(){
+        Scanner scanner = new Scanner("hit\nstand");
+        dealer.getDeck().addDeck();
+        blackjack.addPlayer(player);
+        player.addChips(10);
+        Card card = new Card(CardRank.JACK, CardSuit.DIAMONDS);
+        Card card2 = new Card(CardRank.EIGHT, CardSuit.SPADES);
+        Card card3 = new Card (CardRank.SEVEN, CardSuit.HEARTS);
+        player.addCards(card);
+        player.addCards(card2);
+        player.addCards(card3);
+        blackjack.play(scanner);
+        assertEquals(25, blackjack.getHandTotal(player));
+        assertEquals(0, player.getNumberOfChips());
+    }
+
+    @Test
+    public void playerWinsIfDealerGoesBust(){
+        Scanner scanner = new Scanner("hit\nstand");
+        dealer.getDeck().addCardsToDeck(new Card(CardRank.JACK, CardSuit.HEARTS));
+        dealer.getDeck().addCardsToDeck(new Card(CardRank.ACE, CardSuit.HEARTS));
+        blackjack.addPlayer(player);
+        Card card = new Card(CardRank.SEVEN, CardSuit.DIAMONDS);
+        Card card2 = new Card(CardRank.EIGHT, CardSuit.SPADES);
+        dealer.addCards(card);
+        dealer.addCards(card2);
+        blackjack.play(scanner);
+        assertEquals(990, dealer.getNumberOfChips());
+        assertEquals(25,blackjack.getHandTotal(dealer));
+        assertEquals(1, blackjack.getHandTotal(player));
+        assertEquals(10, player.getNumberOfChips());
+    }
+
+    @Test
+    public void dealerWinsIfThePlayerHasntGoenBust(){
+        Scanner scanner = new Scanner("stand");
+        dealer.getDeck().addDeck();
+        blackjack.addPlayer(player);
+        player.addChips(10);
+        Card card = new Card(CardRank.JACK, CardSuit.DIAMONDS);
+        Card card2 = new Card(CardRank.EIGHT, CardSuit.SPADES);
+        dealer.addCards(card);
+        dealer.addCards(card2);
+        Card card3 = new Card (CardRank.SEVEN, CardSuit.HEARTS);
+        player.addCards(card3);
+        player.addCards(card);
+        blackjack.play(scanner);
+        assertEquals(17,blackjack.getHandTotal(player));
+        assertEquals(18, blackjack.getHandTotal(dealer));
+        assertEquals(1010, dealer.getNumberOfChips());
+        assertEquals(0, player.getNumberOfChips());
+    }
 
     }
 
@@ -141,4 +232,7 @@ public class BlackJackTest {
 
 
 
-}
+
+
+
+

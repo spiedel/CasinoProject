@@ -72,7 +72,7 @@ public class Blackjack implements IPlay {
         return total;
     }
 
-    public boolean isPlayerBust(Person person) {
+    public boolean isBust(Person person) {
         if (getHandTotal(person) > 21) {
             return true;
         } else {
@@ -100,7 +100,11 @@ public class Blackjack implements IPlay {
 
     public int getDealersScore() {
         while (getHandTotal(dealer) < 17) {
+
             dealer.dealCard(dealer);
+            if (isBust(dealer)) {
+                return 0;
+            }
         }
         return getHandTotal(dealer);
     }
@@ -110,10 +114,11 @@ public class Blackjack implements IPlay {
         String input = scanner.nextLine();
         while (!input.equalsIgnoreCase("stand")) {
             if (input.equalsIgnoreCase("hit")) {
-                Card card = dealer.dealCard(player);
-                if (isPlayerBust(player)) {
+                if (isBust(player)) {
                     return 0;
                 }
+                Card card = dealer.dealCard(player);
+
                 System.out.printf("\nYou got a %s of %s, do you want to hit or stand?",card.getRank(), card.getSuit());
                 input = scanner.nextLine();
             } else {

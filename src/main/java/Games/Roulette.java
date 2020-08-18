@@ -1,13 +1,12 @@
 package Games;
 
-import Games.RouletteCollection.IRouletteBet;
+import Interfaces.IRouletteBet;
 import Games.RouletteCollection.RouletteSetUp;
 import Interfaces.IPlay;
 import People.Dealer;
 import People.Player;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class Roulette implements IPlay {

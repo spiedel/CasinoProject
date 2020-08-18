@@ -1,24 +1,32 @@
 package Casino;
 
+import Games.BaccaratCollection.Baccarat;
+import Games.BlackJackCollection.Blackjack;
+import Games.Roulette;
 import Interfaces.IPlay;
+import People.Dealer;
 import People.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class Casino {
 
     private String name;
     private int capacity;
-    private ArrayList<IPlay> games;
+    private HashMap<Integer,IPlay> games;
     private double amountOfMoney;
     private int numberOfChips;
     private ArrayList<Player> players;
 
-    public Casino(String name, int capacity, double amountOfMoney) {
-        this.name = name;
-        this.capacity = capacity;
-        this.games = new ArrayList<IPlay>();
-        this.amountOfMoney = amountOfMoney;
+
+    public Casino() {
+        this.name = "CodeClan Casino";
+        this.capacity = 1000;
+        //this.games = new ArrayList<IPlay>();
+        this.games= new HashMap<Integer, IPlay>();
+        this.amountOfMoney = 1000000;
         this.numberOfChips = 10000;
         this.players = new ArrayList<Player>();
     }
@@ -31,7 +39,7 @@ public class Casino {
         return capacity;
     }
 
-    public ArrayList<IPlay> getGames() {
+    public HashMap<Integer, IPlay> getGames() {
         return games;
     }
 
@@ -65,6 +73,13 @@ public class Casino {
     public void removePlayerFromGame(Player player, IPlay game){
         game.removePlayer(player);
     }
+
+    public void addGameToCasino(int key, IPlay game){
+        this.games.put(key,game);
+    }
+
+
+
 
     public void addPlayerToCasino(Player player) {
         if (player.isOldEnoughToEnter()) {

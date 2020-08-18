@@ -67,6 +67,7 @@ public class Player extends Person{
     }
 
     public BaccaratBet makeBaccaratBet(Scanner scanner) {
+        System.out.println("Do you want to bet on player win, draw or loss?");
         String input = scanner.nextLine();
         BaccaratOutcome betType;
         while(true) {
@@ -87,6 +88,12 @@ public class Player extends Person{
         System.out.println("How much do you want to bet?");
         int betAmount = scanner.nextInt();
         return new BaccaratBet(this, betAmount, betType);
+    }
+
+    public int makeBlackjackBet(Scanner scanner) {
+        System.out.println("How much do you want to bet?");
+        int betAmount = scanner.nextInt();
+        return betAmount;
     }
 
 

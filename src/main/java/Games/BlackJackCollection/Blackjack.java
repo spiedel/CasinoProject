@@ -80,6 +80,13 @@ public class Blackjack implements IPlay {
         }
     }
 
+    public void makeBets(Scanner scanner) {
+        for (Player player: players) {
+            int bet = player.makeBlackjackBet(scanner);
+            betList.put(player, bet);
+        }
+    }
+
     public void initialDealerDeal(){
         dealer.dealCard(dealer);
         dealer.dealCard(dealer);
@@ -129,6 +136,8 @@ public class Blackjack implements IPlay {
     }
 
     public void play(Scanner scanner) {
+        makeBets(scanner);
+
         HashMap<Player, Integer> scores = new HashMap();
         for (Player player : players) {
             int playerScore = getPlayerScore(scanner, player);
@@ -143,12 +152,13 @@ public class Blackjack implements IPlay {
         } else {
             int dealerScore = getDealersScore();
             for (Player player: scores.keySet()) {
+                int betAmount = betList.get(player);
                 if (scores.get(player) > dealerScore){
-                    player.addChips(10);
-                    dealer.removeChips(10);
+                    player.addChips(betAmount);
+                    dealer.removeChips(betAmount);
                 } else if (scores.get(player) < dealerScore){
-                player.removeChips(10);
-                dealer.addChips(10);
+                player.removeChips(betAmount);
+                dealer.addChips(betAmount);
             }
         }
     }

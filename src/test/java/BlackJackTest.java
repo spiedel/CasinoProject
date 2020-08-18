@@ -190,7 +190,7 @@ public class BlackJackTest {
     public void playerWinsIfDealerGoesBust(){
         Scanner scanner = new Scanner("hit\nstand");
         dealer.getDeck().addCardsToDeck(new Card(CardRank.JACK, CardSuit.HEARTS));
-        dealer.getDeck().addCardsToDeck(new Card(CardRank.JACK, CardSuit.HEARTS));
+        dealer.getDeck().addCardsToDeck(new Card(CardRank.JACK, CardSuit.CLUBS));
         blackjack.addPlayer(player);
         Card card = new Card(CardRank.SEVEN, CardSuit.DIAMONDS);
         Card card2 = new Card(CardRank.EIGHT, CardSuit.SPADES);

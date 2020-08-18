@@ -48,6 +48,18 @@ public class Player extends Person{
         game.addPlayer(this);
     }
 
+    //input= nextInt();
+    public boolean hasEnoughChipsToBet(int betAmount) {
+        if (betAmount <= numberOfChips) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+
 
 
     //Add a bet to list

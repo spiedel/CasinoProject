@@ -147,5 +147,30 @@ public class PlayerTest {
 
     }
 
+    //CASE: Player has enough chips to make a bet
+    @Test
+    public void canMakeBet(){
+        //Given: we have a player
+        //And: They have converted their money to chips
+        player.buyChips();
+        //And: The Player wishes to make a Bet
+        //Scanner scanner = new Scanner ("4\n");
+        //When: IO check if they have enough chips to make bet
+        //Then: Expect true
+        assertTrue(player.hasEnoughChipsToBet(4));
+    }
+    //CASE: Player does not have  enough chips to make a bet
+    @Test
+    public void canNotMakeBet(){
+        //Given: we have a player
+        //And: They have converted their money to chips
+        player.buyChips();
+        //And: The Player wishes to make a Bet and has entered the bet ammount.
+        // Scanner scanner = new Scanner ("24\n");
+        //When: IO check if they have enough chips to make bet
+        //Then: Expect true
+        assertFalse(player.hasEnoughChipsToBet(24));
+    }
+
 
 }

@@ -1,7 +1,6 @@
 package People;
 
-import Games.RouletteCollection.ColourBet;
-import Games.RouletteCollection.IRouletteBet;
+import Interfaces.IRouletteBet;
 
 import java.util.ArrayList;
 
@@ -31,6 +30,27 @@ public class Player extends Person{
         this.removeChips(getNumberOfChips());
     }
 
+    //input= nextInt();
+
+    public boolean hasEnoughChipsToBet(int betAmount) {
+
+        if (betAmount <= numberOfChips) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+
+
+
+
+
+
+
+
     //Add a bet to list
 
     public void addRouletteBet(IRouletteBet bet){
@@ -42,11 +62,12 @@ public class Player extends Person{
         playerBets.remove(0);
     }
 
-
     //Want to return the list
     public ArrayList<IRouletteBet> betList(){
         return playerBets;
     }
+
+
 
 
 }

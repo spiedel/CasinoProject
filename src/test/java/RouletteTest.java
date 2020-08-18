@@ -1,12 +1,12 @@
 import Games.Roulette;
 import Games.RouletteCollection.*;
+import Interfaces.IRouletteBet;
 import People.Dealer;
 import People.Player;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.Assert.*;
 

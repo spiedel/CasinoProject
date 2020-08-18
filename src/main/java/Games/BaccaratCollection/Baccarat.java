@@ -3,6 +3,7 @@ package Games.BaccaratCollection;
 import DeckOfCardsClasses.Card;
 import DeckOfCardsClasses.CardDeck;
 import DeckOfCardsClasses.CardRank;
+import Interfaces.IPlay;
 import People.Dealer;
 import People.Person;
 import People.Player;
@@ -10,7 +11,7 @@ import People.Player;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Baccarat {
+public class Baccarat implements IPlay {
 
     private Dealer dealer;
     private ArrayList<Player> players;

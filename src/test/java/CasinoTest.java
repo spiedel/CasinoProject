@@ -1,22 +1,29 @@
 import Casino.Casino;
+import Games.Roulette;
+import Interfaces.IPlay;
+import People.Dealer;
 import People.Player;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 
 public class CasinoTest {
 
     Casino casino;
+    Dealer dealer;
 
     @Before
     public void setUp(){
-        casino = new Casino("Casino",1000, 1000000);
+        casino = new Casino();
+        dealer = new Dealer("John", 40);
     }
 
     @Test
     public void getName(){
-        assertEquals("Casino", casino.getName());
+        assertEquals("CodeClan Casino", casino.getName());
     }
     @Test
     public void getCapacity(){
@@ -79,6 +86,15 @@ public class CasinoTest {
         casino.removePlayerFromCasino(player);
         assertEquals(0, casino.getPlayers().size());
     }
+
+    @Test
+    public void canAddGameToCasino(){
+        Roulette roulette = new Roulette(dealer);
+        casino.addGameToCasino(1, roulette);
+        assertEquals(1, casino.getGames().size()); 
+    }
+
+
 
 
 

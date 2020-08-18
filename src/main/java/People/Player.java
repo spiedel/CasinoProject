@@ -1,6 +1,8 @@
 package People;
 
 import Games.BaccaratCollection.Baccarat;
+import Games.BaccaratCollection.BaccaratBet;
+import Games.BaccaratCollection.BaccaratOutcome;
 import Games.BlackJackCollection.Blackjack;
 import Games.Roulette;
 //import Games.RouletteCollection.ColourBet;
@@ -62,6 +64,36 @@ public class Player extends Person{
             return false;
         }
 
+    }
+
+    public BaccaratBet makeBaccaratBet(Scanner scanner) {
+        System.out.println("Do you want to bet on player win, draw or loss?");
+        String input = scanner.nextLine();
+        BaccaratOutcome betType;
+        while(true) {
+            if(input.equalsIgnoreCase("win")) {
+                betType = BaccaratOutcome.WIN;
+                break;
+            } else if(input.equalsIgnoreCase("loss")){
+                betType = BaccaratOutcome.LOSS;
+                break;
+            } else if(input.equalsIgnoreCase("draw")){
+                betType = BaccaratOutcome.DRAW;
+                break;
+            } else {
+                System.out.println("Please make a bet");
+                input = scanner.nextLine();
+            }
+        }
+        System.out.println("How much do you want to bet?");
+        int betAmount = scanner.nextInt();
+        return new BaccaratBet(this, betAmount, betType);
+    }
+
+    public int makeBlackjackBet(Scanner scanner) {
+        System.out.println("How much do you want to bet?");
+        int betAmount = scanner.nextInt();
+        return betAmount;
     }
 
 

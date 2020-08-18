@@ -37,4 +37,8 @@ public class ColourBet implements IRouletteBet {
     public String getColourBetOn() {
         return colourBetOn;
     }
+
+    public int getReturn() {
+        return 0;
+    }
 }

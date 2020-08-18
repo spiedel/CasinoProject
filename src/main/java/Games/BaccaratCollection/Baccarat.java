@@ -154,27 +154,9 @@ public class Baccarat implements IPlay {
     }
 
     public void playersMakeBets(Scanner scanner){
-        String input = scanner.nextLine();
-        BaccaratOutcome betType;
+
         for (Player player: players) {
-            while(true) {
-                if(input.equalsIgnoreCase("win")) {
-                    betType = BaccaratOutcome.WIN;
-                    break;
-                } else if(input.equalsIgnoreCase("loss")){
-                    betType = BaccaratOutcome.LOSS;
-                    break;
-                } else if(input.equalsIgnoreCase("draw")){
-                    betType = BaccaratOutcome.DRAW;
-                    break;
-                } else {
-                    System.out.println("Please make a bet");
-                    input = scanner.nextLine();
-                }
-            }
-            System.out.println("How much do you want to bet?");
-            int betAmount = scanner.nextInt();
-            BaccaratBet bet = new BaccaratBet(player, betAmount, betType);
+            BaccaratBet bet = player.makeBaccaratBet(scanner);
             betList.add(bet);
         }
     }

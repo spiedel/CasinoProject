@@ -135,7 +135,7 @@ public class BlackJackTest {
 
     @Test
     public void PlayerStands(){
-        Scanner scanner = new Scanner("stand");
+        Scanner scanner = new Scanner("10\nstand");
         dealer.getDeck().addDeck();
         blackjack.addPlayer(player);
         Card card = new Card(CardRank.JACK, CardSuit.DIAMONDS);
@@ -153,7 +153,7 @@ public class BlackJackTest {
     }
     @Test
     public void canPlayerHitsOnce(){
-        Scanner scanner = new Scanner("hit\nstand");
+        Scanner scanner = new Scanner("10\nhit\nstand");
         dealer.getDeck().addDeck();
         blackjack.addPlayer(player);
         Card card = new Card(CardRank.JACK, CardSuit.DIAMONDS);
@@ -171,7 +171,7 @@ public class BlackJackTest {
     }
     @Test
     public void canPlayerGoBust(){
-        Scanner scanner = new Scanner("hit\nstand");
+        Scanner scanner = new Scanner("10\nhit\nstand");
         dealer.getDeck().addDeck();
         blackjack.addPlayer(player);
         player.addChips(10);
@@ -188,7 +188,7 @@ public class BlackJackTest {
 
     @Test
     public void playerWinsIfDealerGoesBust(){
-        Scanner scanner = new Scanner("hit\nstand");
+        Scanner scanner = new Scanner("20\nhit\nstand");
         dealer.getDeck().addCardsToDeck(new Card(CardRank.JACK, CardSuit.HEARTS));
         dealer.getDeck().addCardsToDeck(new Card(CardRank.JACK, CardSuit.CLUBS));
         blackjack.addPlayer(player);
@@ -197,15 +197,15 @@ public class BlackJackTest {
         dealer.addCards(card);
         dealer.addCards(card2);
         blackjack.play(scanner);
-        assertEquals(990, dealer.getNumberOfChips());
+        assertEquals(980, dealer.getNumberOfChips());
         assertEquals(25,blackjack.getHandTotal(dealer));
         assertEquals(10, blackjack.getHandTotal(player));
-        assertEquals(10, player.getNumberOfChips());
+        assertEquals(20, player.getNumberOfChips());
     }
 
     @Test
     public void dealerWinsIfThePlayerHasntGoneBust(){
-        Scanner scanner = new Scanner("stand");
+        Scanner scanner = new Scanner("10\nstand");
         dealer.getDeck().addDeck();
         blackjack.addPlayer(player);
         player.addChips(10);

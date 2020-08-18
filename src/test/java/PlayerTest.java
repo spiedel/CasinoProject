@@ -1,15 +1,19 @@
+import Casino.Casino;
 import DeckOfCardsClasses.Card;
 import DeckOfCardsClasses.CardRank;
 import DeckOfCardsClasses.CardSuit;
+import Games.Roulette;
 import Games.RouletteCollection.ColourBet;
 import Games.RouletteCollection.IRouletteBet;
 import Games.RouletteCollection.OddEvenBet;
+import People.Dealer;
 import People.Player;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
@@ -131,7 +135,17 @@ public class PlayerTest {
         assertEquals(1,player.betList().size());
     }
 
+    @Test
+    public void playerCanChooseGameAndAddedToGame(){
+        Casino casino= new Casino();
+        Player player = new Player ("John",21,600);
+        Roulette roulette = new Roulette(new Dealer("John", 40));
+        Scanner scanner = new Scanner("1\n");
+        casino.addGameToCasino(1, roulette);
+        player.chooseGame(scanner, casino.getGames());
+        assertEquals(1, roulette.getNumberOfPlayers());
 
+    }
 
 
 }

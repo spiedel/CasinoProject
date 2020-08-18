@@ -41,5 +41,9 @@ public class OddEvenBet implements IRouletteBet {
     public String getOddOREven(){
         return this.oddOREven;
     }
+
+    public int getReturn() {
+        return 0;
+    }
 }
 

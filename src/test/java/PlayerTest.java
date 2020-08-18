@@ -2,6 +2,9 @@ import Casino.Casino;
 import DeckOfCardsClasses.Card;
 import DeckOfCardsClasses.CardRank;
 import DeckOfCardsClasses.CardSuit;
+import Games.BaccaratCollection.Baccarat;
+import Games.BaccaratCollection.BaccaratBet;
+import Games.BaccaratCollection.BaccaratOutcome;
 import Games.Roulette;
 import Games.RouletteCollection.ColourBet;
 
@@ -175,6 +178,37 @@ public class PlayerTest {
         //When: IO check if they have enough chips to make bet
         //Then: Expect true
         assertFalse(player.hasEnoughChipsToBet(24));
+    }
+
+    @Test
+    public void playerCanMakeBetOnPlayerWin(){
+        Scanner scanner = new Scanner("win\n20");
+        player.addChips(20);
+
+        BaccaratBet bet = player.makeBaccaratBet(scanner);
+        assertEquals(20, bet.getBetAmount());
+        assertEquals(BaccaratOutcome.WIN, bet.getBaccaratOutcome());
+    }
+
+    @Test
+    public void playerCanMakeBetOnPlayerLose(){
+        Scanner scanner = new Scanner("loss\n20");
+        player.addChips(20);
+
+        BaccaratBet bet = player.makeBaccaratBet(scanner);
+
+        assertEquals(20, bet.getBetAmount());
+        assertEquals(BaccaratOutcome.LOSS, bet.getBaccaratOutcome());
+    }
+
+    @Test
+    public void playerCanMakeBetOnPlayerDraw(){
+        Scanner scanner = new Scanner("draw\n20");
+        player.addChips(20);
+
+        BaccaratBet bet = player.makeBaccaratBet(scanner);
+        assertEquals(20, bet.getBetAmount());
+        assertEquals(BaccaratOutcome.DRAW, bet.getBaccaratOutcome());
     }
 
 

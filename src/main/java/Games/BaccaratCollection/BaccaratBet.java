@@ -1,8 +1,9 @@
 package Games.BaccaratCollection;
 
+import Interfaces.IBet;
 import People.Player;
 
-public class BaccaratBet {
+public class BaccaratBet implements IBet {
 
     Player player;
     int betAmount;
@@ -16,6 +17,20 @@ public class BaccaratBet {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public int getReturn() {
+        switch (baccaratOutcome) {
+            case WIN:
+                return betAmount;
+            case DRAW:
+                return betAmount * 9;
+            case LOSS:
+                return (int) Math.round(betAmount*.9);
+            default:
+                return 0;
+        }
+
     }
 
     public int getBetAmount() {

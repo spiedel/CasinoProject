@@ -29,4 +29,8 @@ public class CombinationBet implements IRouletteBet {
         return this.amountBet;
     }
 
+    public int getReturn() {
+        return 0;
+    }
+
 }

@@ -1,6 +1,9 @@
 package Games.RouletteCollection;
 
 import Interfaces.IRouletteBet;
+import People.Player;
+
+import java.util.Scanner;
 
 public class ColourBet implements IRouletteBet {
 
@@ -9,9 +12,7 @@ public class ColourBet implements IRouletteBet {
 
 
     //Player uses constructor to make bet.
-    public ColourBet(String colourBetOn, int amountBet){
-        this.amountBet = amountBet;
-        this.colourBetOn = colourBetOn;
+    public ColourBet(){
 
     }
 
@@ -33,12 +34,23 @@ public class ColourBet implements IRouletteBet {
         return amountBet;
     }
 
-
     public String getColourBetOn() {
         return colourBetOn;
     }
 
     public int getReturn() {
         return 0;
+    }
+
+    public void makeBet(Scanner scanner, Player player){
+        System.out.println("How much do you want to bet?");
+        int betAmount = scanner.nextInt();
+        if (player.hasEnoughChipsToBet(betAmount)){
+            this.amountBet = betAmount;
+            System.out.println("What colour do you want to bet on?");
+            String colour = scanner.next();
+            this.colourBetOn = colour;
+        }
+
     }
 }

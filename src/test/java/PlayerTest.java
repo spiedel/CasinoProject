@@ -2,10 +2,9 @@ import Casino.Casino;
 import DeckOfCardsClasses.Card;
 import DeckOfCardsClasses.CardRank;
 import DeckOfCardsClasses.CardSuit;
-import Games.BaccaratCollection.Baccarat;
 import Games.BaccaratCollection.BaccaratBet;
 import Games.BaccaratCollection.BaccaratOutcome;
-import Games.Roulette;
+import Games.RouletteCollection.Roulette;
 import Games.RouletteCollection.ColourBet;
 
 //import Games.RouletteCollection.IRouletteBet;
@@ -118,29 +117,29 @@ public class PlayerTest {
         Assert.assertEquals(0, returnedHand.size());
     }
 
-    @Test
-    public void canAddIRouletteBetToBetList(){
-        IRouletteBet bet = new ColourBet("red", 8);
-        //When: I add bet topo list
-        player.addRouletteBet(bet);
-        //Then: I expect there to be one bet in the list
-        assertEquals(1, player.betList().size());
-    }
+//    @Test
+//    public void canAddIRouletteBetToBetList(){
+//        IRouletteBet bet = new ColourBet("red", 8);
+//        //When: I add bet topo list
+//        player.addRouletteBet(bet);
+//        //Then: I expect there to be one bet in the list
+//        assertEquals(1, player.betList().size());
+//    }
 
 
-    @Test
-    public void canRemoveBetFromList(){
-        IRouletteBet bet = new ColourBet("red", 8);
-        player.addRouletteBet(bet);
-        IRouletteBet bet2 = new ColourBet("red", 8);
-        player.addRouletteBet(bet2);
-
-        //When: I remove a bet
-        player.removeRouletteBet();
-
-        //Then: I expect just one bet left
-        assertEquals(1,player.betList().size());
-    }
+//    @Test
+//    public void canRemoveBetFromList(){
+//        IRouletteBet bet = new ColourBet("red", 8);
+//        player.addRouletteBet(bet);
+//        IRouletteBet bet2 = new ColourBet("red", 8);
+//        player.addRouletteBet(bet2);
+//
+//        //When: I remove a bet
+//        player.removeRouletteBet();
+//
+//        //Then: I expect just one bet left
+//        assertEquals(1,player.betList().size());
+//    }
 
     @Test
     public void playerCanChooseGameAndAddedToGame(){
@@ -209,6 +208,14 @@ public class PlayerTest {
         BaccaratBet bet = player.makeBaccaratBet(scanner);
         assertEquals(20, bet.getBetAmount());
         assertEquals(BaccaratOutcome.DRAW, bet.getBaccaratOutcome());
+    }
+
+    @Test
+    public void playerCanMakeColourBet(){
+        Scanner scanner = new Scanner("1\n10\nred");
+        player.addChips(20);
+        IRouletteBet bet = player.makeRouletteBet(scanner);
+        assertEquals(10, bet.getBetAmount());
     }
 
 

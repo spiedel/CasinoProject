@@ -1,9 +1,12 @@
-import Games.Roulette;
+import Games.RouletteCollection.Roulette;
 import Games.RouletteCollection.OddEvenBet;
 import Games.RouletteCollection.RouletteSetUp;
 import People.Dealer;
+import People.Player;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
@@ -11,11 +14,14 @@ public class EvenTest {
 
     OddEvenBet oddEvenBet;
     Roulette roulette;
+    Scanner scanner;
+    Player player;
 
     @Before
     public void setUp(){
-        oddEvenBet = new OddEvenBet(5, "Even");
+        oddEvenBet = new OddEvenBet();
         roulette = new Roulette(new Dealer("Toby", 35));
+        player = new Player("John", 20, 100);
     }
 
     //Test: Getters
@@ -49,16 +55,12 @@ public class EvenTest {
         //And: we have spun for a value
         RouletteSetUp rouletteValue = roulette.spin();
         //And: We have a bet
-        oddEvenBet = new OddEvenBet(6, "odd");
+        oddEvenBet = new OddEvenBet();
 
         //When: we test if bet is sucessful
         //Then: Expect Result False
         assertFalse(oddEvenBet.isBetSuccessful(rouletteValue));
     }
-
-
-
-
 
 
 

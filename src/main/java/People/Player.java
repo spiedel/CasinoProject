@@ -4,7 +4,8 @@ import Games.BaccaratCollection.Baccarat;
 import Games.BaccaratCollection.BaccaratBet;
 import Games.BaccaratCollection.BaccaratOutcome;
 import Games.BlackJackCollection.Blackjack;
-import Games.Roulette;
+import Games.RouletteCollection.ColourBet;
+import Games.RouletteCollection.Roulette;
 //import Games.RouletteCollection.ColourBet;
 //import Games.RouletteCollection.IRouletteBet;
 import Interfaces.IPlay;
@@ -55,15 +56,12 @@ public class Player extends Person{
     }
 
     public boolean hasEnoughChipsToBet(int betAmount) {
-
-
         if (betAmount <= numberOfChips) {
             return true;
         }
         else {
             return false;
         }
-
     }
 
     public BaccaratBet makeBaccaratBet(Scanner scanner) {
@@ -96,6 +94,18 @@ public class Player extends Person{
         return betAmount;
     }
 
+    public IRouletteBet makeRouletteBet(Scanner scanner){
+        System.out.println("Please select bet type.");
+        int input = scanner.nextInt();
+        IRouletteBet bet;
+        if (input == 1) {
+            bet = new ColourBet();
+            bet.makeBet(scanner, this);
+            return bet;
+        }
+
+        return null;
+    }
 
 
 

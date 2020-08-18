@@ -13,8 +13,8 @@ public class CombinationBetTest {
 
     @Before
     public void setUp(){
-        bet = new ColourBet("black", 7);
-        bet2 = new OddEvenBet(4, "even");
+        bet = new ColourBet();
+        bet2 = new OddEvenBet();
         combinationBet = new CombinationBet(bet,bet2);
     }
 

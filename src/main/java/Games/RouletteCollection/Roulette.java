@@ -1,4 +1,4 @@
-package Games;
+package Games.RouletteCollection;
 
 import Interfaces.IRouletteBet;
 import Games.RouletteCollection.RouletteSetUp;
@@ -7,6 +7,7 @@ import People.Dealer;
 import People.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Roulette implements IPlay {
@@ -16,7 +17,6 @@ public class Roulette implements IPlay {
     private int capacity;
     private Random random;
     private ArrayList<RouletteSetUp> rouletteList;
-    private ArrayList<IRouletteBet> betTypes;
 
 
     public Roulette(Dealer dealer) {
@@ -25,7 +25,6 @@ public class Roulette implements IPlay {
         this.capacity = 7;
         random = new Random(3);
         rouletteList = new ArrayList<RouletteSetUp>();
-        betTypes = new ArrayList<IRouletteBet>();
 
         for (RouletteSetUp rouletteSetUp:RouletteSetUp.values()) {
             rouletteList.add(rouletteSetUp);
@@ -98,8 +97,6 @@ public class Roulette implements IPlay {
         //return bet.isBetSuccessful(rouletteValue);
 
     }
-
-
 
 
     public ArrayList<RouletteSetUp> getStartPoint() {

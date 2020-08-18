@@ -1,6 +1,9 @@
 package Games.RouletteCollection;
 
 import Interfaces.IRouletteBet;
+import People.Player;
+
+import java.util.Scanner;
 
 public class CombinationBet implements IRouletteBet {
     //Allows player to make a combination of two bets (later allocate higher return if sucessful).
@@ -31,6 +34,13 @@ public class CombinationBet implements IRouletteBet {
 
     public int getReturn() {
         return 0;
+    }
+
+    public void makeBet(Scanner scanner, Player player){
+        System.out.println("Make first bet");
+        this.bet = player.makeRouletteBet(scanner);
+        System.out.println("Make second bet");
+        this.bet2 = player.makeRouletteBet(scanner);
     }
 
 }

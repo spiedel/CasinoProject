@@ -1,12 +1,9 @@
 import Casino.Casino;
-import Games.Roulette;
-import Interfaces.IPlay;
+import Games.RouletteCollection.Roulette;
 import People.Dealer;
 import People.Player;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 

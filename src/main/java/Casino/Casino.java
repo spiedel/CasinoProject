@@ -1,15 +1,10 @@
 package Casino;
 
-import Games.BaccaratCollection.Baccarat;
-import Games.BlackJackCollection.Blackjack;
-import Games.Roulette;
 import Interfaces.IPlay;
-import People.Dealer;
 import People.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Casino {
 

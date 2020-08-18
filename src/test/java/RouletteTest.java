@@ -1,9 +1,10 @@
-import Games.Roulette;
+import Games.RouletteCollection.Roulette;
 import Games.RouletteCollection.*;
 import Interfaces.IRouletteBet;
 import People.Dealer;
 import People.Player;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -90,9 +91,9 @@ public class RouletteTest {
         roulette.addPlayer(player);
 
         //and the player has placed the bet
-        IRouletteBet bet = new ColourBet("red", 8);
+        //IRouletteBet bet = new ColourBet("red", 8);
         //And: the bet is on the player list
-        player.addRouletteBet(bet);
+        //player.addRouletteBet(bet);
 
         //when play is called with a result of 11
         roulette.play();
@@ -128,11 +129,11 @@ public class RouletteTest {
         //Given: We have a Player that is in the roulette game
         roulette.addPlayer(player);
         //And: The pLayer has made a colour bet that a red colour will come up
-        IRouletteBet bet = new ColourBet("red", 9);
+        //IRouletteBet bet = new ColourBet("red", 9);
         //Add: The player has made a second bet on the number coming up being even
         IRouletteBet bet2 = new OddEvenBet(5 , "even");
         //And: The bets have been added to the players list of bets
-        player.addRouletteBet(bet);
+        //player.addRouletteBet(bet);
         player.addRouletteBet(bet2);
 
 
@@ -149,7 +150,8 @@ public class RouletteTest {
         //Given: We have a Player that is in the roulette game
         roulette.addPlayer(player);
         //And: The pLayer has made a colour bet that a red colour will come up
-        IRouletteBet bet = new ColourBet("black", 9);
+        //IRouletteBet bet = new ColourBet("black", 9);
+        IRouletteBet bet = new ColourBet();
         //Add: The player has made a second bet on the number coming up being even
         IRouletteBet bet2 = new OddEvenBet(5 , "even");
         //And: The bets have been added to the players list of bets
@@ -172,11 +174,11 @@ public class RouletteTest {
         //Given: We have a Player that is in the roulette game
         roulette.addPlayer(player);
         //And: The pLayer has made a colour bet that a red colour will come up
-        IRouletteBet bet = new ColourBet("black", 9);
+        //IRouletteBet bet = new ColourBet("black", 9);
         //Add: The player has made a second bet on the number coming up being even
         IRouletteBet bet2 = new OddEvenBet(5 , "odd");
         //And: The bets have been added to the players list of bets
-        player.addRouletteBet(bet);
+        //player.addRouletteBet(bet);
         player.addRouletteBet(bet2);
 
 
@@ -194,7 +196,7 @@ public class RouletteTest {
         //And: The Game has an active  Player
         roulette.addPlayer(player);
         //And: The active Player has made a combination bet believing the number will be black and odd simultaneously
-        IRouletteBet bet = new ColourBet("black", 9);
+        IRouletteBet bet = new ColourBet();
         IRouletteBet bet2 = new OddEvenBet(5 , "odd");
         IRouletteBet combinationBet = new CombinationBet(bet, bet2);
         //And: The combination bet is in the players bet list
@@ -206,6 +208,7 @@ public class RouletteTest {
         //Then: I expect the player to loose (number from spin seeding is not odd).
         assertEquals(-14, player.getNumberOfChips());
     }
+
 
 
 }

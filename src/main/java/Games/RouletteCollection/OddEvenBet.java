@@ -1,15 +1,16 @@
 package Games.RouletteCollection;
 
 import Interfaces.IRouletteBet;
+import People.Player;
+
+import java.util.Scanner;
 
 public class OddEvenBet implements IRouletteBet {
     private int amountBet;
     private String oddOREven;
 
 
-    public OddEvenBet(int amountBet, String oddOREven){
-        this.amountBet = amountBet;
-        this.oddOREven = oddOREven;
+    public OddEvenBet(){
     }
 
 
@@ -44,6 +45,18 @@ public class OddEvenBet implements IRouletteBet {
 
     public int getReturn() {
         return 0;
+    }
+
+    public void makeBet(Scanner scanner, Player player){
+        System.out.println("How much do you want to bet?");
+        int betAmount = scanner.nextInt();
+        if (player.hasEnoughChipsToBet(betAmount)){
+            this.amountBet = betAmount;
+            System.out.println("Do you want to bet odd or even?");
+            String oddOrEven = scanner.next();
+            this.oddOREven = oddOrEven;
+        }
+
     }
 }
 

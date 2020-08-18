@@ -1,5 +1,7 @@
 package Games.RouletteCollection;
 
+import Interfaces.IRouletteBet;
+
 public class OddEvenBet implements IRouletteBet {
     private int amountBet;
     private String oddOREven;

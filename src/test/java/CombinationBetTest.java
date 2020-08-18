@@ -1,4 +1,5 @@
 import Games.RouletteCollection.*;
+import Interfaces.IRouletteBet;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,5 +1,7 @@
 package Games.RouletteCollection;
 
+import Interfaces.IRouletteBet;
+
 public class ColourBet implements IRouletteBet {
 
     private String colourBetOn;

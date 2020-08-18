@@ -6,6 +6,9 @@ import Games.Roulette;
 import Games.RouletteCollection.ColourBet;
 import Games.RouletteCollection.IRouletteBet;
 import Interfaces.IPlay;
+=======
+import Interfaces.IRouletteBet;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,20 +45,23 @@ public class Player extends Person{
         this.removeChips(getNumberOfChips());
     }
 
+
     public void chooseGame(Scanner scanner, HashMap<Integer, IPlay> gameList){
         int gameNum = scanner.nextInt();
         IPlay game = gameList.get(gameNum);
         game.addPlayer(this);
     }
 
-    //input= nextInt();
     public boolean hasEnoughChipsToBet(int betAmount) {
+
+
         if (betAmount <= numberOfChips) {
             return true;
         }
         else {
             return false;
         }
+
     }
 
 
@@ -72,7 +78,6 @@ public class Player extends Person{
     public void removeRouletteBet (){
         playerBets.remove(0);
     }
-
 
     //Want to return the list
     public ArrayList<IRouletteBet> betList(){

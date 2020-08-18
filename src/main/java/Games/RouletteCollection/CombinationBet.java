@@ -1,5 +1,7 @@
 package Games.RouletteCollection;
 
+import Interfaces.IRouletteBet;
+
 public class CombinationBet implements IRouletteBet {
     //Allows player to make a combination of two bets (later allocate higher return if sucessful).
     //eg: A player can bet the number will be 17 and black simultaneously.

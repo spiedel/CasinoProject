@@ -74,8 +74,8 @@ public class Baccarat implements IPlay {
             Card playerCard2 = player.getHand().get(1);
             Card dealerCard1 = dealer.getHand().get(0);
             Card dealerCard2 = dealer.getHand().get(1);
-            System.out.printf("Player %s has %s of %s and %s of %s \n", player.getName(), playerCard1.getRank(), playerCard1.getSuit(), playerCard2.getRank(), playerCard2.getSuit());
-            System.out.printf("Dealer %s has %s of %s and %s of %s", dealer.getName(), dealerCard1.getRank(), dealerCard1.getSuit(), dealerCard2.getRank(), dealerCard2.getSuit());
+            System.out.printf("Player has %s of %s and %s of %s \n", playerCard1.getRank(), playerCard1.getSuit(), playerCard2.getRank(), playerCard2.getSuit());
+            System.out.printf("Dealer has %s of %s and %s of %s", dealerCard1.getRank(), dealerCard1.getSuit(), dealerCard2.getRank(), dealerCard2.getSuit());
     }
 
     public int getHandTotal(Person person) {
@@ -143,14 +143,19 @@ public class Baccarat implements IPlay {
     public BaccaratOutcome getWinner(Player player, Dealer dealer){
         int playerHandTotal = getHandTotal(player);
         int dealerHandTotal = getHandTotal(dealer);
-
+        System.out.println("\nThe player's hand total is: " + playerHandTotal);
+        System.out.println("\nThe dealer's hand total is: " + dealerHandTotal);
         if (dealerHandTotal == playerHandTotal){
+            System.out.println("\nThe player and the dealer drew.");
             return BaccaratOutcome.DRAW; // draw
         } else if (dealerHandTotal > playerHandTotal){
+            System.out.println("\nThe player lost against the dealer.");
             return BaccaratOutcome.LOSS; // dealer wins
         } else {
+            System.out.println("\nThe player won against the dealer.");
             return BaccaratOutcome.WIN; // player wins
         }
+
     }
 
     public void playersMakeBets(Scanner scanner){
@@ -163,26 +168,37 @@ public class Baccarat implements IPlay {
     public void payOutBets(BaccaratOutcome betType){
         for (BaccaratBet bet: betList) {
             if (bet.getBaccaratOutcome() == betType){
-                bet.getPlayer().addChips(bet.getBetAmount());
-                dealer.removeChips(bet.getBetAmount());
+                bet.getPlayer().addChips(bet.getReturn());
+                dealer.removeChips(bet.getReturn());
+                System.out.printf("\nCongrats %s, your bet was successful! You have gained %d chips and now have a total of %d chips", bet.getPlayer().getName(), bet.getReturn(), bet.getPlayer().getNumberOfChips());
             } else {
                 bet.getPlayer().removeChips(bet.getBetAmount());
                 dealer.addChips(bet.getBetAmount());
+                System.out.printf("\nSorry %s, your bet was not successful! You have lost %d chips and now have a total of %d chips", bet.getPlayer().getName(), bet.getBetAmount(), bet.getPlayer().getNumberOfChips());
             }
         }
     }
 
     public void play(Scanner scanner){
+        System.out.println("Welcome to the Baccarat Game!");
         playersMakeBets(scanner);
+        //dealer.getDeck().addDeck();
+        //dealer.getDeck().shuffle();
         initialDeal(players.get(0), dealer);
         if (isThirdCardDrawnToPlayer(players.get(0))){
-            dealer.dealCard(players.get(0));
+            Card card = dealer.dealCard(players.get(0));
+            System.out.printf("\nPlayer has been given a third card which is a %s of %s", card.getRank(), card.getSuit());
         }
         if (isThirdCardDrawnToDealer(dealer, players.get(0))){
-            dealer.dealCard(dealer);
+            Card card = dealer.dealCard(dealer);
+            System.out.printf("The dealer has been given a third card which is a %s of %s", card.getRank(), card.getSuit());
         }
         BaccaratOutcome betType = getWinner(players.get(0), dealer);
         payOutBets(betType);
+    }
+
+    public int numOfPlayers() {
+        return players.size();
     }
 
 

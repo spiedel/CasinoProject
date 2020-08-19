@@ -29,7 +29,7 @@ public class CombinationBet implements IRouletteBet {
     }
 
     public int getReturn() {
-        return 0;
+       return  bet.getReturn() + bet2.getReturn();
     }
 
     public void makeBet(Scanner scanner, Player player){

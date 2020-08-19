@@ -13,88 +13,94 @@ public class CasinoTest {
     Dealer dealer;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         casino = new Casino();
         dealer = new Dealer("John", 40);
     }
 
     @Test
-    public void getName(){
+    public void getName() {
         assertEquals("CodeClan Casino", casino.getName());
     }
+
     @Test
-    public void getCapacity(){
+    public void getCapacity() {
         assertEquals(1000, casino.getCapacity());
     }
+
     @Test
-    public void getAmountOfMoney(){
-        assertEquals(1000000, casino.getAmountOfMoney(),0.0);
+    public void getAmountOfMoney() {
+        assertEquals(1000000, casino.getAmountOfMoney(), 0.0);
     }
+
     @Test
-    public void getNumberOfChips(){
+    public void getNumberOfChips() {
         assertEquals(10000, casino.getNumberOfChips());
     }
 
     @Test
-    public void startWithZeroPlayers(){
+    public void startWithZeroPlayers() {
         assertEquals(0, casino.getPlayers().size());
     }
 
     @Test
-    public void canSetName(){
+    public void canSetName() {
         casino.setName("Casino1");
         assertEquals("Casino1", casino.getName());
     }
 
     @Test
-    public void canSetCapacity(){
+    public void canSetCapacity() {
         casino.setCapacity(500);
         assertEquals(500, casino.getCapacity());
     }
+
     @Test
-    public void canSetAmountOfMoney(){
+    public void canSetAmountOfMoney() {
         casino.setAmountOfMoney(500);
-        assertEquals(500, casino.getAmountOfMoney(),0.0);
-    }
-    @Test
-    public void canAddPlayerToCasinoIfOldEnough(){
-        Player player = new Player ("John",21,600);
-        casino.addPlayerToCasino(player);
-        assertEquals(1, casino.getPlayers().size() );
-    }
-    @Test
-    public void cantAddPlayerToCasinoIfNotOldEnough(){
-        Player player = new Player ("John",17,600);
-        casino.addPlayerToCasino(player);
-        assertEquals(0, casino.getPlayers().size() );
+        assertEquals(500, casino.getAmountOfMoney(), 0.0);
     }
 
     @Test
-    public void canRemovePlayerFromCasino(){
-        Player player = new Player ("John",21,600);
+    public void canAddPlayerToCasinoIfOldEnough() {
+        Player player = new Player("John", 21, 600);
+        casino.addPlayerToCasino(player);
+        assertEquals(1, casino.getPlayers().size());
+    }
+
+    @Test
+    public void cantAddPlayerToCasinoIfNotOldEnough() {
+        Player player = new Player("John", 17, 600);
+        casino.addPlayerToCasino(player);
+        assertEquals(0, casino.getPlayers().size());
+    }
+
+    @Test
+    public void canRemovePlayerFromCasino() {
+        Player player = new Player("John", 21, 600);
         casino.addPlayerToCasino(player);
         casino.removePlayerFromCasino(player);
         assertEquals(0, casino.getPlayers().size());
     }
 
     @Test
-    public void cantRemovePlayerIfNotInCasino(){
-        Player player = new Player ("John",21,600);
+    public void cantRemovePlayerIfNotInCasino() {
+        Player player = new Player("John", 21, 600);
         casino.removePlayerFromCasino(player);
         assertEquals(0, casino.getPlayers().size());
     }
 
     @Test
-    public void canAddGameToCasino(){
+    public void canChangeGameToCasino() {
         Roulette roulette = new Roulette(dealer);
         casino.addGameToCasino(1, roulette);
-        assertEquals(1, casino.getGames().size()); 
+        assertEquals(3, casino.getGames().size());
     }
 
-
-
-
-
-
-
+    @Test
+    public void canAddGameToCasino() {
+        Roulette roulette = new Roulette(dealer);
+        casino.addGameToCasino(4, roulette);
+        assertEquals(4, casino.getGames().size());
+    }
 }

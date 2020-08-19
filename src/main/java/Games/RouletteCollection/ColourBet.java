@@ -39,11 +39,11 @@ public class ColourBet implements IRouletteBet {
     }
 
     public int getReturn() {
-        return 0;
+        return getBetAmount();
     }
 
     public void makeBet(Scanner scanner, Player player){
-        System.out.println("How much do you want to bet?");
+        System.out.println("How many chips do you want to bet?");
         int betAmount = scanner.nextInt();
         if (player.hasEnoughChipsToBet(betAmount)){
             this.amountBet = betAmount;

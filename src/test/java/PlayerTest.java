@@ -26,6 +26,7 @@ import static org.junit.Assert.*;
 public class PlayerTest {
 
     Player player;
+    Scanner scanner;
 
     @Before
     public void setup(){
@@ -88,8 +89,16 @@ public class PlayerTest {
 
     @Test
     public void canBuyChips(){
-        player.buyChips();
-        Assert.assertEquals(20, player.getNumberOfChips());
+        scanner = new Scanner("20");
+        player.buyChips(scanner);
+        Assert.assertEquals(100, player.getNumberOfChips());
+    }
+
+    @Test
+    public void cantBuyChipsIfNotEnoughMoney(){
+        scanner = new Scanner("1000\n20");
+        player.buyChips(scanner);
+        Assert.assertEquals(100, player.getNumberOfChips());
     }
 
     @Test
@@ -108,7 +117,7 @@ public class PlayerTest {
     public void canCashInChips(){
         player.addChips(10);
         player.cashInChips();
-        Assert.assertEquals(150, player.getMoneyInWallet(),0.0);
+        Assert.assertEquals(102, player.getMoneyInWallet(),0.0);
     }
 
     @Test
@@ -157,9 +166,10 @@ public class PlayerTest {
     //CASE: Player has enough chips to make a bet
     @Test
     public void canMakeBet(){
+
         //Given: we have a player
         //And: They have converted their money to chips
-        player.buyChips();
+        player.addChips(4);
         //And: The Player wishes to make a Bet
         //Scanner scanner = new Scanner ("4\n");
         //When: IO check if they have enough chips to make bet
@@ -171,7 +181,7 @@ public class PlayerTest {
     public void canNotMakeBet(){
         //Given: we have a player
         //And: They have converted their money to chips
-        player.buyChips();
+        player.addChips(23);
         //And: The Player wishes to make a Bet and has entered the bet ammount.
         // Scanner scanner = new Scanner ("24\n");
         //When: IO check if they have enough chips to make bet
@@ -181,7 +191,7 @@ public class PlayerTest {
 
     @Test
     public void playerCanMakeBetOnPlayerWin(){
-        Scanner scanner = new Scanner("win\n20");
+        Scanner scanner = new Scanner("player\n20");
         player.addChips(20);
 
         BaccaratBet bet = player.makeBaccaratBet(scanner);
@@ -191,7 +201,7 @@ public class PlayerTest {
 
     @Test
     public void playerCanMakeBetOnPlayerLose(){
-        Scanner scanner = new Scanner("loss\n20");
+        Scanner scanner = new Scanner("dealer\n20");
         player.addChips(20);
 
         BaccaratBet bet = player.makeBaccaratBet(scanner);
@@ -202,7 +212,7 @@ public class PlayerTest {
 
     @Test
     public void playerCanMakeBetOnPlayerDraw(){
-        Scanner scanner = new Scanner("draw\n20");
+        Scanner scanner = new Scanner("tie\n20");
         player.addChips(20);
 
         BaccaratBet bet = player.makeBaccaratBet(scanner);

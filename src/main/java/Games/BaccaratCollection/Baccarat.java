@@ -154,7 +154,6 @@ public class Baccarat implements IPlay {
     }
 
     public void playersMakeBets(Scanner scanner){
-
         for (Player player: players) {
             BaccaratBet bet = player.makeBaccaratBet(scanner);
             betList.add(bet);

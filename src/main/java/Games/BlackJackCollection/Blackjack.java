@@ -2,6 +2,7 @@ package Games.BlackJackCollection;
 
 import DeckOfCardsClasses.Card;
 import DeckOfCardsClasses.CardDeck;
+import DeckOfCardsClasses.CardRank;
 import Interfaces.IPlay;
 import People.Dealer;
 import People.Person;
@@ -80,6 +81,14 @@ public class Blackjack implements IPlay {
         }
     }
 
+    public void changeAceValue(Person person){
+        for (Card card : person.getHand()) {
+            if (card.getRank() == CardRank.ACE && isBust(person)) {
+                card.setValue(1);
+            }
+        }
+    }
+
     public void makeBets(Scanner scanner) {
         for (Player player: players) {
             int bet = player.makeBlackjackBet(scanner);
@@ -110,6 +119,7 @@ public class Blackjack implements IPlay {
             if (isBust(dealer)) {
                 return 0;
             }
+            changeAceValue(dealer);
         }
         return getHandTotal(dealer);
     }
@@ -123,6 +133,7 @@ public class Blackjack implements IPlay {
                     return 0;
                 }
                 Card card = dealer.dealCard(player);
+                changeAceValue(player);
 
                 System.out.printf("\nYou got a %s of %s, do you want to hit or stand?",card.getRank(), card.getSuit());
                 input = scanner.nextLine();
@@ -130,7 +141,6 @@ public class Blackjack implements IPlay {
                 System.out.println("Please enter hit or stand.");
                 input = scanner.nextLine();
             }
-
         }
         return getHandTotal(player);
     }
@@ -159,10 +169,10 @@ public class Blackjack implements IPlay {
                 } else if (scores.get(player) < dealerScore){
                 player.removeChips(betAmount);
                 dealer.addChips(betAmount);
+                }
             }
         }
     }
-}
 }
 
 

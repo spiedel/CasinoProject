@@ -5,6 +5,8 @@ import Games.BaccaratCollection.BaccaratBet;
 import Games.BaccaratCollection.BaccaratOutcome;
 import Games.BlackJackCollection.Blackjack;
 import Games.RouletteCollection.ColourBet;
+import Games.RouletteCollection.CombinationBet;
+import Games.RouletteCollection.OddEvenBet;
 import Games.RouletteCollection.Roulette;
 //import Games.RouletteCollection.ColourBet;
 //import Games.RouletteCollection.IRouletteBet;
@@ -101,6 +103,17 @@ public class Player extends Person{
         if (input == 1) {
             bet = new ColourBet();
             bet.makeBet(scanner, this);
+            addRouletteBet(bet);
+            return bet;
+        } else if (input == 2){
+            bet = new OddEvenBet();
+            bet.makeBet(scanner, this);
+            addRouletteBet(bet);
+            return bet;
+        } else if (input == 3){
+            bet = new CombinationBet();
+            bet.makeBet(scanner, this);
+            addRouletteBet(bet);
             return bet;
         }
 

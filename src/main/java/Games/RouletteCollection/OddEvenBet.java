@@ -14,7 +14,7 @@ public class OddEvenBet implements IRouletteBet {
     }
 
 
-    //Is sucessful is implemented via interface
+    //Is successful is implemented via interface
     //Here: Because two different bets possible: checks which bet is being made
     //Then:: calls a method to check whether the bet is true or false based on whther the peron is predicting an even or odd number.
     public boolean isBetSuccessful(RouletteSetUp rouletteValue) {

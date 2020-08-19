@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
-public class EvenTest {
+public class OddEvenBetTest {
 
     OddEvenBet oddEvenBet;
     Roulette roulette;
@@ -28,11 +28,17 @@ public class EvenTest {
 
     @Test
     public void canGetBetType(){
-        assertTrue( oddEvenBet.getOddOREven().equalsIgnoreCase("even"));
+        player.addChips(20);
+        scanner = new Scanner("10\neven");
+        oddEvenBet.makeBet(scanner, player);
+        assertTrue(oddEvenBet.getOddOREven().equalsIgnoreCase("even"));
     }
 
     @Test
     public void canGetBetAmount(){
+        player.addChips(20);
+        scanner = new Scanner("5\nodd");
+        oddEvenBet.makeBet(scanner, player);
         assertEquals(5, oddEvenBet.getBetAmount());
     }
 
@@ -41,6 +47,10 @@ public class EvenTest {
         //Given; WE have a roulette Game
         //And: we have spun for a value
         RouletteSetUp rouletteValue = roulette.spin();
+
+        player.addChips(20);
+        scanner = new Scanner("10\neven");
+        oddEvenBet.makeBet(scanner, player);
 
         //When: we test isBetTrue
 
@@ -57,7 +67,11 @@ public class EvenTest {
         //And: We have a bet
         oddEvenBet = new OddEvenBet();
 
-        //When: we test if bet is sucessful
+        player.addChips(20);
+        scanner = new Scanner("10\nodd");
+        oddEvenBet.makeBet(scanner, player);
+
+        //When: we test if bet is successful
         //Then: Expect Result False
         assertFalse(oddEvenBet.isBetSuccessful(rouletteValue));
     }

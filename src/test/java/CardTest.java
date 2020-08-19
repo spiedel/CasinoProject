@@ -28,7 +28,7 @@ public class CardTest {
 
     @Test
     public void canGetRankValue() {
-        assertEquals(1, card.getRankValue());
+        assertEquals(11, card.getRankValue());
     }
 
     @Test

@@ -102,6 +102,58 @@ public class BlackJackTest {
     }
 
     @Test
+    public void doesPlayerAceValueChangeToOne(){
+        Card card = new Card(CardRank.JACK, CardSuit.DIAMONDS);
+        Card card2 = new Card(CardRank.EIGHT,CardSuit.SPADES);
+        player.addCards(card);
+        player.addCards(card2);
+        Card card3 = new Card(CardRank.ACE,CardSuit.SPADES);
+        player.addCards(card3);
+        blackjack.changeAceValue(player);
+        assertEquals(19, blackjack.getHandTotal(player));
+    }
+
+    @Test
+    public void doesDealerAceValueChangeToOne(){
+        Card card = new Card(CardRank.JACK, CardSuit.DIAMONDS);
+        Card card2 = new Card(CardRank.SIX,CardSuit.SPADES);
+        dealer.addCards(card);
+        dealer.addCards(card2);
+        Card card3 = new Card(CardRank.ACE,CardSuit.SPADES);
+        dealer.addCards(card3);
+        blackjack.changeAceValue(dealer);
+        assertEquals(17, blackjack.getHandTotal(dealer));
+    }
+
+    @Test
+    public void doesPlayerAceValueChangeToOneTwice(){
+        Card card = new Card(CardRank.JACK, CardSuit.DIAMONDS);
+        Card card2 = new Card(CardRank.EIGHT,CardSuit.SPADES);
+        player.addCards(card);
+        player.addCards(card2);
+        Card card3 = new Card(CardRank.ACE,CardSuit.SPADES);
+        player.addCards(card3);
+        Card card4 = new Card(CardRank.ACE,CardSuit.SPADES);
+        player.addCards(card4);
+        blackjack.changeAceValue(player);
+        assertEquals(20, blackjack.getHandTotal(player));
+    }
+
+    @Test
+    public void doesDealerAceValueChangeToOneTwice(){
+        Card card = new Card(CardRank.JACK, CardSuit.DIAMONDS);
+        Card card2 = new Card(CardRank.THREE,CardSuit.SPADES);
+        dealer.addCards(card);
+        dealer.addCards(card2);
+        Card card3 = new Card(CardRank.ACE,CardSuit.SPADES);
+        dealer.addCards(card3);
+        Card card4 = new Card(CardRank.ACE,CardSuit.SPADES);
+        dealer.addCards(card4);
+        blackjack.changeAceValue(dealer);
+        assertEquals(15, blackjack.getHandTotal(dealer));
+    }
+
+    @Test
     public void doesDealerHaveTwoCards(){
         dealer.getDeck().addDeck();
         blackjack.initialDealerDeal();
@@ -112,15 +164,15 @@ public class BlackJackTest {
     public void canGetDealerInitialScore(){
         dealer.getDeck().addDeck();
         blackjack.initialDealerDeal();
-        assertEquals(3, blackjack.getHandTotal(dealer));
+        assertEquals(13, blackjack.getHandTotal(dealer));
     }
     @Test
     public void canGetDealerScore(){
         dealer.getDeck().addDeck();
        blackjack.initialDealerDeal();
        blackjack.getDealersScore();
-       assertEquals(6,dealer.getNumberOfCards());
-       assertEquals(21, blackjack.getHandTotal(dealer));
+       assertEquals(4,dealer.getNumberOfCards());
+       assertEquals(20, blackjack.getHandTotal(dealer));
     }
     @Test
     public void canGetPlayerScore(){
@@ -130,7 +182,7 @@ public class BlackJackTest {
         blackjack.initialPlayerDeal();
         blackjack.getPlayerScore(scanner, player);
         assertEquals(3, player.getNumberOfCards());
-        assertEquals(6, blackjack.getHandTotal(player));
+        assertEquals(16, blackjack.getHandTotal(player));
     }
 
     @Test

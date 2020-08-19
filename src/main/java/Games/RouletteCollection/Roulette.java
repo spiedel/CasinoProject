@@ -9,6 +9,7 @@ import People.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Roulette implements IPlay {
 
@@ -78,10 +79,11 @@ public class Roulette implements IPlay {
         bets.put(player, playerBets);
     } */
 
-    public void play() {
+    public void play(Scanner scanner) {
         RouletteSetUp rouletteValue = spin();
 
         for (Player player: players) {
+            player.makeRouletteBet(scanner);
             ArrayList<IRouletteBet> bets = player.betList();
             for (IRouletteBet bet:bets) {
                 if(bet.isBetSuccessful(rouletteValue)){
@@ -90,16 +92,13 @@ public class Roulette implements IPlay {
                     player.removeChips(bet.getBetAmount());
                 }
             }
-
         }
-
-
         //return bet.isBetSuccessful(rouletteValue);
-
     }
 
 
     public ArrayList<RouletteSetUp> getStartPoint() {
         return rouletteList;
     }
+
 }

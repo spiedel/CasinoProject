@@ -80,25 +80,39 @@ public class Roulette implements IPlay {
     } */
 
     public void play(Scanner scanner) {
+        System.out.println("Welcome to the Roulette Game!");
         RouletteSetUp rouletteValue = spin();
-
+        for (Player player : players) {
+            System.out.println(player.getName() + " Please make a bet.");
+            IRouletteBet bet = player.makeRouletteBet(scanner);
+            player.addRouletteBet(bet);
+        }
         for (Player player: players) {
-            player.makeRouletteBet(scanner);
             ArrayList<IRouletteBet> bets = player.betList();
             for (IRouletteBet bet:bets) {
                 if(bet.isBetSuccessful(rouletteValue)){
-                    player.addChips(bet.getBetAmount());
+                    System.out.println(player.getName() + " Your bet was successful!" + " You have won " + bet.getReturn() + " chips");
+                    player.addChips(bet.getReturn());
+                    dealer.removeChips(bet.getReturn());
                 } else {
                     player.removeChips(bet.getBetAmount());
+                    dealer.removeChips(bet.getBetAmount());
+                    System.out.println("Sorry " + player.getName() + " your bet was not successful." + " You have lost " + bet.getBetAmount() + " chips");
                 }
+                System.out.println(player.getName() + " you now have " + player.getNumberOfChips() + " chips");
             }
         }
+        System.out.println("The winning number was: " + rouletteValue.getValue() +  " and its colour was " + rouletteValue.getColour());
         //return bet.isBetSuccessful(rouletteValue);
     }
 
 
     public ArrayList<RouletteSetUp> getStartPoint() {
         return rouletteList;
+    }
+
+    public int numOfPlayers() {
+        return players.size();
     }
 
 }

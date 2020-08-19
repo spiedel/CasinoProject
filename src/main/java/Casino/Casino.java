@@ -1,6 +1,10 @@
 package Casino;
 
+import Games.BaccaratCollection.Baccarat;
+import Games.BlackJackCollection.Blackjack;
+import Games.RouletteCollection.Roulette;
 import Interfaces.IPlay;
+import People.Dealer;
 import People.Player;
 
 import java.util.ArrayList;
@@ -14,13 +18,21 @@ public class Casino {
     private double amountOfMoney;
     private int numberOfChips;
     private ArrayList<Player> players;
-
+    private Roulette roulette;
+    private Blackjack blackjack;
+    private Baccarat baccarat;
 
     public Casino() {
         this.name = "CodeClan Casino";
         this.capacity = 1000;
         //this.games = new ArrayList<IPlay>();
         this.games= new HashMap<Integer, IPlay>();
+        this.roulette  =new Roulette(new Dealer("John",40));
+        this.blackjack = new Blackjack(new Dealer("John",40),10);
+        this.baccarat = new Baccarat(new Dealer("John",40),7);
+        this.games.put(1, roulette);
+        this.games.put(2,blackjack);
+        this.games.put(3,baccarat);
         this.amountOfMoney = 1000000;
         this.numberOfChips = 10000;
         this.players = new ArrayList<Player>();

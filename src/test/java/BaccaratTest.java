@@ -291,7 +291,7 @@ public class BaccaratTest {
 
     @Test
     public void playerCanMakeBetOnPlayerWin(){
-        Scanner scanner = new Scanner("win\n20");
+        Scanner scanner = new Scanner("player\n20");
         player.addChips(20);
         baccarat.addPlayer(player);
         baccarat.playersMakeBets(scanner);
@@ -302,7 +302,7 @@ public class BaccaratTest {
 
     @Test
     public void playerCanMakeBetOnPlayerLose(){
-        Scanner scanner = new Scanner("loss\n20");
+        Scanner scanner = new Scanner("dealer\n20");
         player.addChips(20);
         baccarat.addPlayer(player);
         baccarat.playersMakeBets(scanner);
@@ -312,8 +312,8 @@ public class BaccaratTest {
     }
 
     @Test
-    public void playerCanMakeBetOnPlayerDraw(){
-        Scanner scanner = new Scanner("draw\n20");
+    public void playerCanMakeBetOnPlayerTie(){
+        Scanner scanner = new Scanner("tie\n20");
         player.addChips(20);
         baccarat.addPlayer(player);
         baccarat.playersMakeBets(scanner);
@@ -324,7 +324,7 @@ public class BaccaratTest {
 
     @Test
     public void playerMakesWrongBet(){
-        Scanner scanner = new Scanner("drw\ndraw\n10");
+        Scanner scanner = new Scanner("drw\ntie\n10");
         player.addChips(10);
         baccarat.addPlayer(player);
         baccarat.playersMakeBets(scanner);
@@ -335,7 +335,7 @@ public class BaccaratTest {
 
     @Test
     public void playerMakesCorrectBetAndWinsGame(){
-        Scanner scanner = new Scanner("win\n10");
+        Scanner scanner = new Scanner("player\n10");
         player.addChips(10);
         baccarat.addPlayer(player);
         dealer.getDeck().addDeck();
@@ -346,7 +346,7 @@ public class BaccaratTest {
 
     @Test
     public void playerMakesWrongBetAndWinsGame(){
-        Scanner scanner = new Scanner("draw\n10");
+        Scanner scanner = new Scanner("tie\n10");
         player.addChips(10);
         baccarat.addPlayer(player);
         dealer.getDeck().addDeck();

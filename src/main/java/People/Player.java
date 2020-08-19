@@ -1,5 +1,6 @@
 package People;
 
+import Casino.Casino;
 import Games.BaccaratCollection.Baccarat;
 import Games.BaccaratCollection.BaccaratBet;
 import Games.BaccaratCollection.BaccaratOutcome;
@@ -40,21 +41,34 @@ public class Player extends Person{
         return moneyInWallet;
     }
 
-    public void buyChips(){
-        this.addChips((int) (moneyInWallet / 5));
-        this.moneyInWallet = 0;
+    public void buyChips(Scanner scanner) {
+        System.out.printf("5 chips costs 1 pound. How much do you want to spend on chips %s?", this.getName());
+        int spendingMoney = scanner.nextInt();
+        if (moneyInWallet > spendingMoney) {
+            this.addChips((int) (spendingMoney * 5));
+            moneyInWallet -= spendingMoney;
+        } else {
+            System.out.println("Sorry you do not have enough money to buy that many chips. Please try again.");
+            buyChips(scanner);
+        }
     }
 
-    public void cashInChips(){
-        moneyInWallet += getNumberOfChips() * 5;
-        this.removeChips(getNumberOfChips());
-    }
+        public void cashInChips () {
+            moneyInWallet += getNumberOfChips() / 5;
+            this.removeChips(getNumberOfChips());
+        }
+
+
 
 
     public void chooseGame(Scanner scanner, HashMap<Integer, IPlay> gameList){
         int gameNum = scanner.nextInt();
-        IPlay game = gameList.get(gameNum);
-        game.addPlayer(this);
+        if (gameNum >3) {
+            System.out.println("Sorry you don't want to play a game, please enjoy the bar!");
+            return;
+        }
+            IPlay game = gameList.get(gameNum);
+            game.addPlayer(this);
     }
 
     public boolean hasEnoughChipsToBet(int betAmount) {
@@ -67,53 +81,51 @@ public class Player extends Person{
     }
 
     public BaccaratBet makeBaccaratBet(Scanner scanner) {
-        System.out.println("Do you want to bet on player win, draw or loss?");
+        System.out.printf("%s, Do you want to bet on player, dealer or tie? \n", this.getName());
         String input = scanner.nextLine();
         BaccaratOutcome betType;
         while(true) {
-            if(input.equalsIgnoreCase("win")) {
+            if(input.equalsIgnoreCase("player")) {
                 betType = BaccaratOutcome.WIN;
                 break;
-            } else if(input.equalsIgnoreCase("loss")){
+            } else if(input.equalsIgnoreCase("dealer")){
                 betType = BaccaratOutcome.LOSS;
                 break;
-            } else if(input.equalsIgnoreCase("draw")){
+            } else if(input.equalsIgnoreCase("tie")){
                 betType = BaccaratOutcome.DRAW;
                 break;
             } else {
-                System.out.println("Please make a bet");
+                System.out.println("Please select a bet type.");
                 input = scanner.nextLine();
             }
         }
-        System.out.println("How much do you want to bet?");
+        System.out.println("How many chips do you want to bet?");
         int betAmount = scanner.nextInt();
         return new BaccaratBet(this, betAmount, betType);
     }
 
     public int makeBlackjackBet(Scanner scanner) {
-        System.out.println("How much do you want to bet?");
+        System.out.println("How many chips do you want to bet?");
         int betAmount = scanner.nextInt();
+        scanner.nextLine();
         return betAmount;
     }
 
     public IRouletteBet makeRouletteBet(Scanner scanner){
-        System.out.println("Please select bet type.");
+        System.out.println("Please select bet type.\n 1: Colour Bet \n 2: Odd or Even Bet \n 3: Combination Bet");
         int input = scanner.nextInt();
         IRouletteBet bet;
         if (input == 1) {
             bet = new ColourBet();
             bet.makeBet(scanner, this);
-            addRouletteBet(bet);
             return bet;
         } else if (input == 2){
             bet = new OddEvenBet();
             bet.makeBet(scanner, this);
-            addRouletteBet(bet);
             return bet;
         } else if (input == 3){
             bet = new CombinationBet();
             bet.makeBet(scanner, this);
-            addRouletteBet(bet);
             return bet;
         }
 

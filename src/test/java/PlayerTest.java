@@ -5,7 +5,6 @@ import DeckOfCardsClasses.CardSuit;
 import Games.BaccaratCollection.BaccaratBet;
 import Games.BaccaratCollection.BaccaratOutcome;
 import Games.RouletteCollection.Roulette;
-import Games.RouletteCollection.ColourBet;
 
 //import Games.RouletteCollection.IRouletteBet;
 //import Games.RouletteCollection.OddEvenBet;
@@ -196,7 +195,7 @@ public class PlayerTest {
 
         BaccaratBet bet = player.makeBaccaratBet(scanner);
         assertEquals(20, bet.getBetAmount());
-        assertEquals(BaccaratOutcome.WIN, bet.getBaccaratOutcome());
+        assertEquals(BaccaratOutcome.PLAYER, bet.getBaccaratOutcome());
     }
 
     @Test
@@ -207,7 +206,7 @@ public class PlayerTest {
         BaccaratBet bet = player.makeBaccaratBet(scanner);
 
         assertEquals(20, bet.getBetAmount());
-        assertEquals(BaccaratOutcome.LOSS, bet.getBaccaratOutcome());
+        assertEquals(BaccaratOutcome.DEALER, bet.getBaccaratOutcome());
     }
 
     @Test
@@ -217,7 +216,7 @@ public class PlayerTest {
 
         BaccaratBet bet = player.makeBaccaratBet(scanner);
         assertEquals(20, bet.getBetAmount());
-        assertEquals(BaccaratOutcome.DRAW, bet.getBaccaratOutcome());
+        assertEquals(BaccaratOutcome.TIE, bet.getBaccaratOutcome());
     }
 
     @Test

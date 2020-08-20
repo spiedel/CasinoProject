@@ -1,5 +1,4 @@
 import DeckOfCardsClasses.Card;
-import DeckOfCardsClasses.CardDeck;
 import DeckOfCardsClasses.CardRank;
 import DeckOfCardsClasses.CardSuit;
 import Games.BaccaratCollection.Baccarat;
@@ -10,7 +9,6 @@ import People.Player;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static org.junit.Assert.*;
@@ -268,7 +266,7 @@ public class BaccaratTest {
         card2 = new Card(CardRank.THREE,CardSuit.SPADES);
         dealer.addCards(card);
         player.addCards(card2);
-        assertEquals(BaccaratOutcome.DRAW, baccarat.getWinner(player, dealer));
+        assertEquals(BaccaratOutcome.TIE, baccarat.getWinner(player, dealer));
     }
 
     @Test
@@ -277,7 +275,7 @@ public class BaccaratTest {
         card2 = new Card(CardRank.TWO,CardSuit.SPADES);
         dealer.addCards(card);
         player.addCards(card2);
-        assertEquals(BaccaratOutcome.LOSS, baccarat.getWinner(player, dealer));
+        assertEquals(BaccaratOutcome.DEALER, baccarat.getWinner(player, dealer));
     }
 
     @Test
@@ -286,7 +284,7 @@ public class BaccaratTest {
         card2 = new Card(CardRank.FOUR,CardSuit.SPADES);
         dealer.addCards(card);
         player.addCards(card2);
-        assertEquals(BaccaratOutcome.WIN, baccarat.getWinner(player, dealer));
+        assertEquals(BaccaratOutcome.PLAYER, baccarat.getWinner(player, dealer));
     }
 
     @Test
@@ -297,7 +295,7 @@ public class BaccaratTest {
         baccarat.playersMakeBets(scanner);
         BaccaratBet bet = baccarat.getBetList().get(0);
         assertEquals(20, bet.getBetAmount());
-        assertEquals(BaccaratOutcome.WIN, bet.getBaccaratOutcome());
+        assertEquals(BaccaratOutcome.PLAYER, bet.getBaccaratOutcome());
     }
 
     @Test
@@ -308,7 +306,7 @@ public class BaccaratTest {
         baccarat.playersMakeBets(scanner);
         BaccaratBet bet = baccarat.getBetList().get(0);
         assertEquals(20, bet.getBetAmount());
-        assertEquals(BaccaratOutcome.LOSS, bet.getBaccaratOutcome());
+        assertEquals(BaccaratOutcome.DEALER, bet.getBaccaratOutcome());
     }
 
     @Test
@@ -319,7 +317,7 @@ public class BaccaratTest {
         baccarat.playersMakeBets(scanner);
         BaccaratBet bet = baccarat.getBetList().get(0);
         assertEquals(20, bet.getBetAmount());
-        assertEquals(BaccaratOutcome.DRAW, bet.getBaccaratOutcome());
+        assertEquals(BaccaratOutcome.TIE, bet.getBaccaratOutcome());
     }
 
     @Test
@@ -330,7 +328,7 @@ public class BaccaratTest {
         baccarat.playersMakeBets(scanner);
         BaccaratBet bet = baccarat.getBetList().get(0);
         assertEquals(10, bet.getBetAmount());
-        assertEquals(BaccaratOutcome.DRAW, bet.getBaccaratOutcome());
+        assertEquals(BaccaratOutcome.TIE, bet.getBaccaratOutcome());
     }
 
     @Test

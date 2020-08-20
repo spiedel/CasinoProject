@@ -49,9 +49,6 @@ public class Roulette implements IPlay {
         return this.players.size();
     }
 
-    /*public HashMap<Player, HashMap<Integer, Integer>> getBets() {
-        return bets;
-    }*/
 
     public void addPlayer(Player player) {
         if (getNumberOfPlayers() < capacity ) {
@@ -69,15 +66,6 @@ public class Roulette implements IPlay {
         int index = random.nextInt(37);
         return rouletteList.get(index);
     }
-
-    /*public void bet(int numberOfChips, ArrayList<Integer> betNumbers, Player player) {
-        HashMap<Integer, Integer> playerBets = new HashMap<Integer, Integer>();
-        for (int betNumber : betNumbers ) {
-            player.removeChips(numberOfChips);
-            playerBets.put(betNumber, numberOfChips);
-        }
-        bets.put(player, playerBets);
-    } */
 
     public void play(Scanner scanner) {
         System.out.println("Welcome to the Roulette Game!");

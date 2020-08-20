@@ -160,11 +160,16 @@ public class Blackjack implements IPlay {
                 int betAmount = betList.get(player);
                 player.removeChips(betAmount);
                 System.out.printf("Sorry %s, you have gone bust.\n You've lost %d chips and you now have a total of %d chips.\n", player.getName(), betAmount, player.getNumberOfChips());
+                player.getHand().clear();
             } else {
                 scores.put(player, playerScore);
             }
         }
         if (scores.isEmpty()) {
+            dealer.getDeck().clear();
+            dealer.getHand().clear();
+            this.players.clear();
+            this.betList.clear();
             return;
         } else {
             int dealerScore = getDealersScore();

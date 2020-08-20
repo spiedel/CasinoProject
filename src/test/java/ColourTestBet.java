@@ -26,7 +26,7 @@ public class ColourTestBet {
     @Test
     public void canGetBetAmount(){
         player.addChips(20);
-        scanner = new Scanner("4 red");
+        scanner = new Scanner("4\nred");
         colourBet.makeBet(scanner, player);
         assertEquals(4, colourBet.getBetAmount(), 0);
     }
@@ -34,7 +34,7 @@ public class ColourTestBet {
     @Test
     public void canGetColourBetOn(){
         player.addChips(20);
-        scanner = new Scanner("4 red");
+        scanner = new Scanner("4\nred");
         colourBet.makeBet(scanner, player);
         assertEquals("red", colourBet.getColourBetOn());
     }
@@ -46,7 +46,7 @@ public class ColourTestBet {
         Roulette roulette = new Roulette(new Dealer("Matty", 25));
         //And: the game has a roulette setup and we have spun
         player.addChips(20);
-        scanner = new Scanner("10 red");
+        scanner = new Scanner("10\nred");
         colourBet.makeBet(scanner, player);
         RouletteSetUp rouletteValue = roulette.spin();
         //When: I pass the roulette spin into is successful
@@ -61,7 +61,7 @@ public class ColourTestBet {
         Roulette roulette = new Roulette(new Dealer("Matty", 25));
         //And: the game has a roulette setup and we have spun
         player.addChips(20);
-        scanner = new Scanner("10 black");
+        scanner = new Scanner("10\nblack");
         colourBet.makeBet(scanner, player);
         RouletteSetUp rouletteValue = roulette.spin();
         //And our bet is on the wrong colour

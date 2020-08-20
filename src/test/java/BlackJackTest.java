@@ -200,8 +200,8 @@ public class BlackJackTest {
         blackjack.addPlayer(player);
         player.addChips(10);
         blackjack.play(scanner);
-        assertEquals(20,blackjack.getHandTotal(dealer));
-        assertEquals(18, blackjack.getHandTotal(player));
+        assertEquals(0,blackjack.getHandTotal(dealer));
+        assertEquals(0, blackjack.getHandTotal(player));
         assertEquals(0, player.getNumberOfChips());
         assertEquals(1010, dealer.getNumberOfChips());
     }
@@ -218,7 +218,7 @@ public class BlackJackTest {
         player.addCards(card2);
         player.addCards(card3);
         blackjack.play(scanner);
-        assertEquals(38, blackjack.getHandTotal(player));
+        assertEquals(0, blackjack.getHandTotal(player));
         assertEquals(0, player.getNumberOfChips());
     }
 
@@ -233,8 +233,8 @@ public class BlackJackTest {
         dealer.addCards(card);
         blackjack.play(scanner);
         assertEquals(980, dealer.getNumberOfChips());
-        assertEquals(23,blackjack.getHandTotal(dealer));
-        assertEquals(18, blackjack.getHandTotal(player));
+        assertEquals(0,blackjack.getHandTotal(dealer));
+        assertEquals(0, blackjack.getHandTotal(player));
         assertEquals(40, player.getNumberOfChips());
     }
 
@@ -245,8 +245,8 @@ public class BlackJackTest {
         blackjack.addPlayer(player);
         player.addChips(10);
         blackjack.play(scanner);
-        assertEquals(13,blackjack.getHandTotal(player));
-        assertEquals(18, blackjack.getHandTotal(dealer));
+        assertEquals(0,blackjack.getHandTotal(player));
+        assertEquals(0, blackjack.getHandTotal(dealer));
         assertEquals(1010, dealer.getNumberOfChips());
         assertEquals(0, player.getNumberOfChips());
     }

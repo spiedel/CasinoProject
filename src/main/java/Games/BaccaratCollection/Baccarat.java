@@ -1,8 +1,6 @@
 package Games.BaccaratCollection;
 
 import DeckOfCardsClasses.Card;
-import DeckOfCardsClasses.CardDeck;
-import DeckOfCardsClasses.CardRank;
 import Interfaces.IPlay;
 import People.Dealer;
 import People.Person;
@@ -56,14 +54,6 @@ public class Baccarat implements IPlay {
             players.remove(player);
         }
     }
-
-//    public void setUpCardValues(){
-//        // 10/Jack/Queen/King = 0
-//        CardRank.TEN.setValue(0);
-//        CardRank.JACK.setValue(0);
-//        CardRank.QUEEN.setValue(0);
-//        CardRank.KING.setValue(0);
-//    }
 
     public void initialDeal(Player player, Dealer dealer){
             dealer.dealCard(player);
@@ -147,13 +137,13 @@ public class Baccarat implements IPlay {
         System.out.println("\nThe dealer's hand total is: " + dealerHandTotal);
         if (dealerHandTotal == playerHandTotal){
             System.out.println("\nThe player and the dealer drew.");
-            return BaccaratOutcome.DRAW; // draw
+            return BaccaratOutcome.TIE; // draw
         } else if (dealerHandTotal > playerHandTotal){
             System.out.println("\nThe player lost against the dealer.");
-            return BaccaratOutcome.LOSS; // dealer wins
+            return BaccaratOutcome.DEALER; // dealer wins
         } else {
             System.out.println("\nThe player won against the dealer.");
-            return BaccaratOutcome.WIN; // player wins
+            return BaccaratOutcome.PLAYER; // player wins
         }
 
     }

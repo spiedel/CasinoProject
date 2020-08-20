@@ -21,11 +21,11 @@ public class BaccaratBet implements IBet {
 
     public int getReturn() {
         switch (baccaratOutcome) {
-            case WIN:
+            case PLAYER:
                 return betAmount;
-            case DRAW:
+            case TIE:
                 return betAmount * 9;
-            case LOSS:
+            case DEALER:
                 return (int) Math.round(betAmount*.9);
             default:
                 return 0;

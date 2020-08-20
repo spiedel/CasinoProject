@@ -18,19 +18,19 @@ public class BaccaratBetTest {
 
     @Test
     public void canReturnDrawAmount() {
-        baccaratBet = new BaccaratBet(player, 10, BaccaratOutcome.DRAW);
+        baccaratBet = new BaccaratBet(player, 10, BaccaratOutcome.TIE);
         assertEquals(90, baccaratBet.getReturn());
     }
 
     @Test
     public void canReturnWinAmount() {
-        baccaratBet = new BaccaratBet(player, 10, BaccaratOutcome.WIN);
+        baccaratBet = new BaccaratBet(player, 10, BaccaratOutcome.PLAYER);
         assertEquals(10, baccaratBet.getReturn());
     }
 
     @Test
     public void canReturnLossAmount() {
-        baccaratBet = new BaccaratBet(player, 10, BaccaratOutcome.LOSS);
+        baccaratBet = new BaccaratBet(player, 10, BaccaratOutcome.DEALER);
         assertEquals(9, baccaratBet.getReturn());
     }
 

@@ -1,6 +1,5 @@
 package People;
 
-import Casino.Casino;
 import Games.BaccaratCollection.Baccarat;
 import Games.BaccaratCollection.BaccaratBet;
 import Games.BaccaratCollection.BaccaratOutcome;
@@ -24,17 +23,12 @@ public class Player extends Person{
 
     private double moneyInWallet;
     private ArrayList<IRouletteBet> playerBets;
-    private Roulette roulette;
-    private Blackjack blackjack;
-    private Baccarat baccarat;
-    private Dealer dealer;
 
 
     public Player(String name, int age, double startingMoney) {
         super(name, age);
         this.moneyInWallet = startingMoney;
         this.playerBets = new ArrayList<IRouletteBet>();
-        this.dealer = new Dealer ("John", 40);
     }
 
     public double getMoneyInWallet() {
@@ -53,10 +47,10 @@ public class Player extends Person{
         }
     }
 
-        public void cashInChips () {
-            moneyInWallet += getNumberOfChips() / 5;
-            this.removeChips(getNumberOfChips());
-        }
+    public void cashInChips () {
+        moneyInWallet += getNumberOfChips() / 5;
+        this.removeChips(getNumberOfChips());
+    }
 
 
 
@@ -86,13 +80,13 @@ public class Player extends Person{
         BaccaratOutcome betType;
         while(true) {
             if(input.equalsIgnoreCase("player")) {
-                betType = BaccaratOutcome.WIN;
+                betType = BaccaratOutcome.PLAYER;
                 break;
             } else if(input.equalsIgnoreCase("dealer")){
-                betType = BaccaratOutcome.LOSS;
+                betType = BaccaratOutcome.DEALER;
                 break;
             } else if(input.equalsIgnoreCase("tie")){
-                betType = BaccaratOutcome.DRAW;
+                betType = BaccaratOutcome.TIE;
                 break;
             } else {
                 System.out.println("Please select a bet type.");

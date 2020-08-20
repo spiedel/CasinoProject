@@ -14,7 +14,6 @@ public abstract class Person {
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
-        this.numberOfChips = 0;
         this.hand = new ArrayList<Card>();
     }
 

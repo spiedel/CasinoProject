@@ -1,7 +1,6 @@
 package Games.BlackJackCollection;
 
 import DeckOfCardsClasses.Card;
-import DeckOfCardsClasses.CardDeck;
 import DeckOfCardsClasses.CardRank;
 import Interfaces.IPlay;
 import People.Dealer;
@@ -11,6 +10,8 @@ import People.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import static Runner.Runner.pause;
 
 public class Blackjack implements IPlay {
 
@@ -129,10 +130,10 @@ public class Blackjack implements IPlay {
         String input = scanner.nextLine();
         while (!input.equalsIgnoreCase("stand")) {
             if (input.equalsIgnoreCase("hit")) {
+                Card card = dealer.dealCard(player);
                 if (isBust(player)) {
                     return 0;
                 }
-                Card card = dealer.dealCard(player);
                 changeAceValue(player);
 
                 System.out.printf( "You got a %s of %s.\n Your current hand value is %d.\n Do you want to hit or stand?", card.getRank(), card.getSuit(),getHandTotal(player));
@@ -151,7 +152,11 @@ public class Blackjack implements IPlay {
         makeBets(scanner);
         dealer.getDeck().addDeck();
         dealer.getDeck().shuffle();
+
+
+        pause(1);
         initialPlayerDeal();
+        pause(1);
         initialDealerDeal();
         HashMap<Player, Integer> scores = new HashMap();
         for (Player player : players) {
@@ -174,6 +179,7 @@ public class Blackjack implements IPlay {
         } else {
             int dealerScore = getDealersScore();
             for (Player player: scores.keySet()) {
+                pause(1);
                 int betAmount = betList.get(player);
                 if (scores.get(player) > dealerScore){
                     player.addChips(betAmount);

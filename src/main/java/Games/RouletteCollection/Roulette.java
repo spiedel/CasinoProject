@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+import static Runner.Runner.pause;
 
 public class Roulette implements IPlay {
 
@@ -69,13 +72,20 @@ public class Roulette implements IPlay {
 
     public void play(Scanner scanner) {
         System.out.println("Welcome to the Roulette Game!");
-        RouletteSetUp rouletteValue = spin();
         for (Player player : players) {
             System.out.println(player.getName() + " Please make a bet.");
             IRouletteBet bet = player.makeRouletteBet(scanner);
             player.addRouletteBet(bet);
         }
+
+        System.out.println("Spinning...");
+        pause(1);
+        RouletteSetUp rouletteValue = spin();
+        System.out.println("The winning number is " + rouletteValue.getValue() +  " and its colour is " + rouletteValue.getColour());
+
+
         for (Player player: players) {
+            pause(1);
             ArrayList<IRouletteBet> bets = player.betList();
             for (IRouletteBet bet:bets) {
                 if(bet.isBetSuccessful(rouletteValue)){
@@ -93,7 +103,6 @@ public class Roulette implements IPlay {
 
             player.removeRouletteBet();
         }
-        System.out.println("The winning number was: " + rouletteValue.getValue() +  " and its colour was " + rouletteValue.getColour());
 
         this.players.clear();
     }

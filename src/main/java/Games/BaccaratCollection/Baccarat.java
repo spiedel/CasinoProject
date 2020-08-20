@@ -170,11 +170,11 @@ public class Baccarat implements IPlay {
             if (bet.getBaccaratOutcome() == betType){
                 bet.getPlayer().addChips(bet.getReturn());
                 dealer.removeChips(bet.getReturn());
-                System.out.printf("\nCongrats %s, your bet was successful! You have gained %d chips and now have a total of %d chips", bet.getPlayer().getName(), bet.getReturn(), bet.getPlayer().getNumberOfChips());
+                System.out.printf("\nCongrats %s, your bet was successful! You have gained %d chips and now have a total of %d chips\n", bet.getPlayer().getName(), bet.getReturn(), bet.getPlayer().getNumberOfChips());
             } else {
                 bet.getPlayer().removeChips(bet.getBetAmount());
                 dealer.addChips(bet.getBetAmount());
-                System.out.printf("\nSorry %s, your bet was not successful! You have lost %d chips and now have a total of %d chips", bet.getPlayer().getName(), bet.getBetAmount(), bet.getPlayer().getNumberOfChips());
+                System.out.printf("\nSorry %s, your bet was not successful! You have lost %d chips and now have a total of %d chips\n", bet.getPlayer().getName(), bet.getBetAmount(), bet.getPlayer().getNumberOfChips());
             }
         }
     }
@@ -182,8 +182,8 @@ public class Baccarat implements IPlay {
     public void play(Scanner scanner){
         System.out.println("Welcome to the Baccarat Game!");
         playersMakeBets(scanner);
-        //dealer.getDeck().addDeck();
-        //dealer.getDeck().shuffle();
+        dealer.getDeck().addDeck();
+        dealer.getDeck().shuffle();
         initialDeal(players.get(0), dealer);
         if (isThirdCardDrawnToPlayer(players.get(0))){
             Card card = dealer.dealCard(players.get(0));
@@ -195,6 +195,14 @@ public class Baccarat implements IPlay {
         }
         BaccaratOutcome betType = getWinner(players.get(0), dealer);
         payOutBets(betType);
+
+        for (Player player : players ) {
+            player.getHand().clear();
+        }
+        dealer.getDeck().clear();
+        dealer.getHand().clear();
+        this.players.clear();
+        this.betList.clear();
     }
 
     public int numOfPlayers() {

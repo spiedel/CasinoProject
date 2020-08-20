@@ -98,4 +98,15 @@ public class Casino {
             players.remove(player);
         }
     }
+
+    public void closeCasino() {
+        for (Player player : players) {
+            player.cashInChips();
+            System.out.printf("%s you have finished the day with £%.2f. Have a good night!\n", player.getName(), player.getMoneyInWallet());
+        }
+        //get chips from dealers?
+
+        this.players.clear();
+        System.out.println("The casino is now closed. Hope you all had fun.");
+    }
 }

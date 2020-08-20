@@ -116,13 +116,16 @@ public class Blackjack implements IPlay {
                 return 0;
             }
             changeAceValue(dealer);
-            System.out.printf( "The dealer got a %s of %s.\n Their current hand value is %d.", card.getRank(), card.getSuit(),getHandTotal(dealer));
+            System.out.printf( "The dealer got a %s of %s.\n", card.getRank(), card.getSuit());
+
         }
+        System.out.printf( "The dealer's score is %d.", getHandTotal(dealer));
+
         return getHandTotal(dealer);
     }
 
     public int getPlayerScore(Scanner scanner, Player player) {
-        System.out.println("Do you want to hit or stand?");
+        System.out.printf("%s you have a current hand value of %d. Do you want to hit or stand?", player.getName(), getHandTotal(player));
         String input = scanner.nextLine();
         while (!input.equalsIgnoreCase("stand")) {
             if (input.equalsIgnoreCase("hit")) {
@@ -146,8 +149,8 @@ public class Blackjack implements IPlay {
     public void play(Scanner scanner) {
         System.out.println("Welcome to the BlackJack Game!");
         makeBets(scanner);
-        //dealer.getDeck().addDeck();
-        //dealer.getDeck().shuffle();
+        dealer.getDeck().addDeck();
+        dealer.getDeck().shuffle();
         initialPlayerDeal();
         initialDealerDeal();
         HashMap<Player, Integer> scores = new HashMap();
@@ -170,13 +173,20 @@ public class Blackjack implements IPlay {
                 if (scores.get(player) > dealerScore){
                     player.addChips(betAmount);
                     dealer.removeChips(betAmount);
-                    System.out.printf(" Congrats %s, you have won against the dealer!\n You've gain %d chips and you now have a total of %d chips.", player.getName(), betAmount, player.getNumberOfChips());
+                    System.out.printf("\nCongrats %s, you have won against the dealer!\n You've gain %d chips and you now have a total of %d chips.\n", player.getName(), betAmount, player.getNumberOfChips());
                 } else if (scores.get(player) < dealerScore){
                 player.removeChips(betAmount);
                 dealer.addChips(betAmount);
-                    System.out.printf("Sorry %s, you have lost against the dealer.\n You've lost %d chips and you now have a total of %d chips.", player.getName(), betAmount, player.getNumberOfChips());
+                    System.out.printf("\nSorry %s, you have lost against the dealer.\n You've lost %d chips and you now have a total of %d chips.\n", player.getName(), betAmount, player.getNumberOfChips());
                 }
+
+                player.getHand().clear();
             }
+            dealer.getDeck().clear();
+            dealer.getHand().clear();
+            this.players.clear();
+            this.betList.clear();
+
         }
     }
 

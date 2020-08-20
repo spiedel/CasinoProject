@@ -100,10 +100,14 @@ public class Roulette implements IPlay {
                     System.out.println("Sorry " + player.getName() + " your bet was not successful." + " You have lost " + bet.getBetAmount() + " chips");
                 }
                 System.out.println(player.getName() + " you now have " + player.getNumberOfChips() + " chips");
+
             }
+
+            player.removeRouletteBet();
         }
         System.out.println("The winning number was: " + rouletteValue.getValue() +  " and its colour was " + rouletteValue.getColour());
-        //return bet.isBetSuccessful(rouletteValue);
+
+        this.players.clear();
     }
 
 

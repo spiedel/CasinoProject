@@ -12,18 +12,29 @@ public class Runner {
         Scanner input = new Scanner(System.in);
         System.out.println("Hello, Welcome to the Casino!");
         addAllPlayersToCasino(input, casino);
-        for (Player player1 : casino.getPlayers()) {
-            player1.buyChips(input);
-            System.out.printf("%s, please select a game to play: \n", player1.getName());
-            System.out.println("1: Roulette \n2: BlackJack \n3: Baccarat\n4: No game");
-            player1.chooseGame(input, casino.getGames());
+
+        //buy chips
+        for (Player player: casino.getPlayers()) {
+            player.buyChips(input);
         }
-        for (int gameNum : casino.getGames().keySet()) {
-            IPlay game = casino.getGames().get(gameNum);
-            if (game.numOfPlayers() >= 1) {
-                game.play(input);
+
+        //play first games
+        chooseAndPlayGames(input, casino);
+
+        //play other games
+        System.out.println("Do you want to play again?");
+        String lineInput = input.nextLine();
+        while (!lineInput.equalsIgnoreCase("no")) {
+            if (lineInput.equalsIgnoreCase("yes")) {
+                chooseAndPlayGames(input, casino);
+                System.out.println("Do you want to play again?");
+            } else {
+                System.out.println("Please enter yes or no.");
             }
+            lineInput = input.nextLine();
         }
+        casino.closeCasino();
+
     }
 
     public static void addPlayerToGame(Scanner input, Casino casino) {
@@ -58,4 +69,19 @@ public class Runner {
              lineInput = input.nextLine();
         }
     }
+
+    public static void chooseAndPlayGames(Scanner input, Casino casino) {
+        for (Player player1 : casino.getPlayers()) {
+            System.out.printf("%s, please select a game to play: \n", player1.getName());
+            System.out.println("1: Roulette \n2: BlackJack \n3: Baccarat\n4: No game");
+            player1.chooseGame(input, casino.getGames());
+        }
+        for (int gameNum : casino.getGames().keySet()) {
+            IPlay game = casino.getGames().get(gameNum);
+            if (game.numOfPlayers() >= 1) {
+                game.play(input);
+            }
+        }
+    }
+
 }

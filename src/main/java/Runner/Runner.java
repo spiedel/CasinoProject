@@ -1,8 +1,11 @@
+package Runner;
+
 import Casino.Casino;
 import Interfaces.IPlay;
 import People.Player;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Runner {
 
@@ -93,6 +96,14 @@ public class Runner {
             if (game.numOfPlayers() >= 1) {
                 game.play(input);
             }
+        }
+    }
+
+    public static void pause(int timeInSeconds) {
+        try {
+            TimeUnit.SECONDS.sleep(timeInSeconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

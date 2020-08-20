@@ -9,6 +9,8 @@ import People.Player;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static Runner.Runner.pause;
+
 public class Baccarat implements IPlay {
 
     private Dealer dealer;
@@ -56,16 +58,19 @@ public class Baccarat implements IPlay {
     }
 
     public void initialDeal(Player player, Dealer dealer){
-            dealer.dealCard(player);
-            dealer.dealCard(player);
-            dealer.dealCard(dealer);
-            dealer.dealCard(dealer);
-            Card playerCard1 = player.getHand().get(0);
-            Card playerCard2 = player.getHand().get(1);
-            Card dealerCard1 = dealer.getHand().get(0);
-            Card dealerCard2 = dealer.getHand().get(1);
-            System.out.printf("Player has %s of %s and %s of %s \n", playerCard1.getRank(), playerCard1.getSuit(), playerCard2.getRank(), playerCard2.getSuit());
-            System.out.printf("Dealer has %s of %s and %s of %s", dealerCard1.getRank(), dealerCard1.getSuit(), dealerCard2.getRank(), dealerCard2.getSuit());
+        dealer.dealCard(player);
+        dealer.dealCard(player);
+        Card playerCard1 = player.getHand().get(0);
+        Card playerCard2 = player.getHand().get(1);
+        System.out.printf("Player has %s of %s and %s of %s \n", playerCard1.getRank(), playerCard1.getSuit(), playerCard2.getRank(), playerCard2.getSuit());
+
+        pause(1);
+
+        dealer.dealCard(dealer);
+        dealer.dealCard(dealer);
+        Card dealerCard1 = dealer.getHand().get(0);
+        Card dealerCard2 = dealer.getHand().get(1);
+        System.out.printf("Dealer has %s of %s and %s of %s", dealerCard1.getRank(), dealerCard1.getSuit(), dealerCard2.getRank(), dealerCard2.getSuit());
     }
 
     public int getHandTotal(Person person) {
@@ -134,6 +139,7 @@ public class Baccarat implements IPlay {
         int playerHandTotal = getHandTotal(player);
         int dealerHandTotal = getHandTotal(dealer);
         System.out.println("\nThe player's hand total is: " + playerHandTotal);
+        pause(1);
         System.out.println("\nThe dealer's hand total is: " + dealerHandTotal);
         if (dealerHandTotal == playerHandTotal){
             System.out.println("\nThe player and the dealer drew.");
@@ -174,14 +180,17 @@ public class Baccarat implements IPlay {
         playersMakeBets(scanner);
         dealer.getDeck().addDeck();
         dealer.getDeck().shuffle();
+        pause(1);
         initialDeal(players.get(0), dealer);
         if (isThirdCardDrawnToPlayer(players.get(0))){
             Card card = dealer.dealCard(players.get(0));
+            pause(1);
             System.out.printf("\nPlayer has been given a third card which is a %s of %s", card.getRank(), card.getSuit());
         }
         if (isThirdCardDrawnToDealer(dealer, players.get(0))){
+            pause(1);
             Card card = dealer.dealCard(dealer);
-            System.out.printf("The dealer has been given a third card which is a %s of %s", card.getRank(), card.getSuit());
+            System.out.printf("\nThe dealer has been given a third card which is a %s of %s", card.getRank(), card.getSuit());
         }
         BaccaratOutcome betType = getWinner(players.get(0), dealer);
         payOutBets(betType);

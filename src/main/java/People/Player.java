@@ -124,7 +124,7 @@ public class Player extends Person{
     }
 
     public IRouletteBet makeRouletteBet(Scanner scanner){
-        System.out.println("Please select bet type.\n 1: Colour Bet \n 2: Odd or Even Bet \n 3: Combination Bet \n 4: Number Bet");
+        System.out.println("Please select bet type.\n 1: Colour Bet \n 2: Odd or Even Bet \n 3: Number Bet \n 4: Combination Bet");
         while(!scanner.hasNextInt()){
             System.out.println("Please enter a number.");
             scanner.nextLine();
@@ -140,11 +140,11 @@ public class Player extends Person{
             bet.makeBet(scanner, this);
             return bet;
         } else if (input == 3){
-            bet = new CombinationBet();
+            bet = new NumberBet();
             bet.makeBet(scanner, this);
             return bet;
         } else if (input == 4){
-            bet = new NumberBet();
+            bet = new CombinationBet();
             bet.makeBet(scanner, this);
             return bet;
         }

@@ -49,12 +49,21 @@ public class OddEvenBet implements IRouletteBet {
 
     public void makeBet(Scanner scanner, Player player){
         System.out.println("How many chips do you want to bet?");
+        while(!scanner.hasNextInt()){
+            System.out.println("Please enter a number.");
+            scanner.nextLine();
+        }
         int betAmount = scanner.nextInt();
         if (player.hasEnoughChipsToBet(betAmount)){
             this.amountBet = betAmount;
             System.out.println("Do you want to bet odd or even?");
             String oddOrEven = scanner.next();
-            this.oddOREven = oddOrEven;
+            if (oddOrEven.equalsIgnoreCase("odd") || oddOrEven.equalsIgnoreCase("even")){
+                this.oddOREven = oddOrEven;
+            } else {
+                System.out.println("You must select either odd or even. Please try again.");
+                makeBet(scanner, player);
+            }
         } else {
             System.out.println("Sorry you don't have enough chips to bet with. Please try again.");
             makeBet(scanner, player);

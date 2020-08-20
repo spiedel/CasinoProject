@@ -38,12 +38,21 @@ public class NumberBet implements IRouletteBet {
 
     public void makeBet(Scanner scanner, Player player){
         System.out.println("How many chips do you want to bet?");
+        while(!scanner.hasNextInt()){
+            System.out.println("Please enter a number.");
+            scanner.nextLine();
+        }
         int betAmount = scanner.nextInt();
         if (player.hasEnoughChipsToBet(betAmount)){
             this.amountBet = betAmount;
-            System.out.println("What number do you want to bet on?");
+            System.out.println("What number do you want to bet on? Please select a number between 1 and 36.");
             int number = scanner.nextInt();
-            this.numberBetOn = number;
+            if (number >= 1 && number <= 36){
+                this.numberBetOn = number;
+            } else {
+                System.out.println("You must select a number between 1 and 36. Please try again.");
+                makeBet(scanner, player);
+            }
         } else {
             System.out.println("Sorry you don't have enough chips to bet with. Please try again.");
             makeBet(scanner, player);

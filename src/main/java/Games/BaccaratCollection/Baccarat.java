@@ -139,7 +139,7 @@ public class Baccarat implements IPlay {
             System.out.println("\nThe player and the dealer drew.");
             return BaccaratOutcome.TIE; // draw
         } else if (dealerHandTotal > playerHandTotal){
-            System.out.println("\nThe player lost against the dealer.");
+            System.out.println("\nThe dealer won against the player.");
             return BaccaratOutcome.DEALER; // dealer wins
         } else {
             System.out.println("\nThe player won against the dealer.");

@@ -41,8 +41,16 @@ public class Runner {
         System.out.println("Please enter your name: ");
         String name = input.nextLine();
         System.out.println("Please enter your age: ");
+        while(!input.hasNextInt()){
+            System.out.println("Please enter a number.");
+            input.nextLine();
+        }
         int age = Integer.parseInt(input.nextLine());
         System.out.println("Please enter the amount of money you are betting with: ");
+        while(!input.hasNextInt()){
+            System.out.println("Please enter a number.");
+            input.nextLine();
+        }
         double moneyInWallet = Integer.parseInt(input.nextLine());
         Player player = new Player(name, age, moneyInWallet);
 
@@ -74,6 +82,10 @@ public class Runner {
         for (Player player1 : casino.getPlayers()) {
             System.out.printf("%s, please select a game to play: \n", player1.getName());
             System.out.println("1: Roulette \n2: BlackJack \n3: Baccarat\n4: No game");
+            while(!input.hasNextInt()){
+                System.out.println("Please enter a number.");
+                input.nextLine();
+            }
             player1.chooseGame(input, casino.getGames());
         }
         for (int gameNum : casino.getGames().keySet()) {

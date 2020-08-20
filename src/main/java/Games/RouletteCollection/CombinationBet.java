@@ -37,7 +37,12 @@ public class CombinationBet implements IRouletteBet {
         this.bet = player.makeRouletteBet(scanner);
         System.out.println("Make second bet");
         this.bet2 = player.makeRouletteBet(scanner);
-        this.amountBet = bet.getBetAmount() + bet2.getBetAmount();
+        if (player.hasEnoughChipsToBet(bet.getBetAmount() + bet2.getBetAmount())) {
+            this.amountBet = bet.getBetAmount() + bet2.getBetAmount();
+        } else {
+            System.out.println("Sorry you don't have enough chips to bet with. Please try again.");
+            makeBet(scanner, player);
+        }
     }
 
 }

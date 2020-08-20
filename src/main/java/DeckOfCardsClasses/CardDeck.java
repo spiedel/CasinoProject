@@ -36,4 +36,8 @@ public class CardDeck {
         return cards.remove(0);
     }
 
+    public void clear() {
+        cards.clear();
+    }
+
 }

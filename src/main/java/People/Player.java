@@ -44,7 +44,7 @@ public class Player extends Person{
     public void buyChips(Scanner scanner) {
         System.out.printf("5 chips costs 1 pound. How much do you want to spend on chips %s?", this.getName());
         int spendingMoney = scanner.nextInt();
-        if (moneyInWallet > spendingMoney) {
+        if (moneyInWallet >= spendingMoney) {
             this.addChips((int) (spendingMoney * 5));
             moneyInWallet -= spendingMoney;
         } else {
@@ -64,7 +64,7 @@ public class Player extends Person{
     public void chooseGame(Scanner scanner, HashMap<Integer, IPlay> gameList){
         int gameNum = scanner.nextInt();
         if (gameNum >3) {
-            System.out.println("Sorry you don't want to play a game, please enjoy the bar!");
+            System.out.printf("Sorry you don't want to play a game %s, please enjoy the bar!\n", getName());
             return;
         }
             IPlay game = gameList.get(gameNum);
@@ -105,7 +105,7 @@ public class Player extends Person{
     }
 
     public int makeBlackjackBet(Scanner scanner) {
-        System.out.println("How many chips do you want to bet?");
+        System.out.println(this.getName() + " how many chips do you want to bet?");
         int betAmount = scanner.nextInt();
         scanner.nextLine();
         return betAmount;
